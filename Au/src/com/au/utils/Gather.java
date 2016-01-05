@@ -84,7 +84,14 @@ public class Gather {
                 price = new Price();
                 price.setEname(strArr[0]);
                 price.setCname(strArr[1]);
-                
+                price.setZxj(StrUtils.str2Double(strArr[3]));
+                price.setKpj(StrUtils.str2Double(strArr[6]));
+                price.setZgj(StrUtils.str2Double(strArr[7]));
+                price.setZdj(StrUtils.str2Double(strArr[8]));
+                price.setZdf(StrUtils.str2Double(strArr[17]));
+                price.setZsj(StrUtils.str2Double(strArr[5]));
+                price.setGxsj(strArr[16]);
+                res.add(price);
             }
 		}
 		return res;
