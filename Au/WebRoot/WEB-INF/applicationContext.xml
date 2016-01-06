@@ -18,24 +18,23 @@
 	 -->
 	<mvc:annotation-driven />
 	<!-- 扫描注解 -->
-	<context:component-scan base-package="com.myweibo.*"></context:component-scan>
+	<context:component-scan base-package="com.au.*"></context:component-scan>
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/" /> <!--可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑 -->
 		<property name="suffix" value=".jsp"/>
 	</bean>
 	
 	<!-- 在那些不能使用注入功能的类的时候，用此工具，来获取spring托管的类 -->
+	<!-- 
 	<bean id="SpringContextUtil" class="com.myweibo.utils.SpringContextUtil"/>
-
+ 	-->
 	<!-- 配置定时任务开始 -->
 	<!-- 
 	详细说明：
 	ref参数指定的即任务类，method指定的即需要运行的方法，cron及cronExpression表达式，具体写法这里不介绍了，详情见上篇文章附录。
 	 -->
 	<task:scheduled-tasks> 
-		<task:scheduled ref="weiboTask" method="repost" cron="0 0/1 * * * ?"/>
-		<task:scheduled ref="weiboTask" method="startThread" cron="0 0/2 * * * ?"/>
-		
+		<task:scheduled ref="auTask" method="gather" cron="0 0/2 * * * ?"/>
 	</task:scheduled-tasks>
 	<!---->
 	<!-- 加载数据库配置文件 -->
