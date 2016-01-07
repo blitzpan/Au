@@ -68,4 +68,17 @@ public class PriceDao {
 		String sql = "select * from price where gxsj>=? and gxsj<=? order by gxsj asc";
 		return jdbcTemplate.query(sql, new Object[]{parm.get("startTime"), parm.get("endTime")}, new BeanPropertyRowMapper<>(Price.class));
 	}
+	/**
+	 * @Description:查询最新的一条数据 
+	 * @param @return
+	 * @param @throws Exception   
+	 * @return Price  
+	 * @throws
+	 * @author Panyk
+	 * @date 2016年1月7日
+	 */
+	public Price queryLastPrice() throws Exception{
+		String sql = "SELECT * from price limit 0,1";
+		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper(Price.class));
+	}
 }

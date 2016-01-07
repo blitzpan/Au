@@ -10,8 +10,11 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 public class SendMailUtils extends Thread{
 	@Autowired
 	private JavaMailSender mailSender;
+	/*
 	@Autowired
 	private FreeMarkerConfigurer freemarkerConfiguration;
+	*/
+	private String msg;
 	
 	
 	public SendMailUtils() {
@@ -20,7 +23,6 @@ public class SendMailUtils extends Thread{
 	@Override
 	public void run() {
 		try {
-			this.sendSimpleMail();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,13 +32,13 @@ public class SendMailUtils extends Thread{
 	 * 单纯的文本邮件
 	 * @return
 	 */
-	public String sendSimpleMail() {
+	public String sendSimpleMail(String msg) {
 		SimpleMailMessage mail = new SimpleMailMessage();
 		try {
 			mail.setTo("1028353676@qq.com");// 接受者
 			mail.setFrom("youxiangformajia@163.com");// 发送者,和xml中的一致
 			mail.setSubject("邮件测试");// 主题
-			mail.setText("简单邮件发送测试");// 邮件内容
+			mail.setText(msg);// 邮件内容
 			mailSender.send(mail);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -134,11 +136,10 @@ public class SendMailUtils extends Thread{
 	public void setMailSender(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
 	}
-
-	public FreeMarkerConfigurer getFreemarkerConfiguration() {
-		return freemarkerConfiguration;
+	public String getMsg() {
+		return msg;
 	}
-	public void setFreemarkerConfiguration(FreeMarkerConfigurer freemarkerConfiguration) {
-		this.freemarkerConfiguration = freemarkerConfiguration;
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 }

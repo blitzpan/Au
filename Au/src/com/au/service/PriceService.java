@@ -1,5 +1,6 @@
 package com.au.service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -38,5 +39,14 @@ public class PriceService {
 	 */
 	public List<Price> queryPrices(Map parm) throws Exception{
 		return priceDao.queryPrices(parm);
+	}
+	public String downAnalyse() throws Exception{
+		String res="";
+		Price p = priceDao.queryLastPrice();
+		if(p.getKpj() > p.getZxj()){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			res += sdf.format(p.getGxsj()) + " 开盘价：" + p.getKpj() + " 最新价："+ p.getZxj() + "\n" + p;
+		}
+		return res;
 	}
 }

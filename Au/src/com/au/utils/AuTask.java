@@ -15,6 +15,8 @@ public class AuTask {
 	private PriceService priceService;
 	@Autowired
 	private Gather gather;
+	@Autowired
+	private SendMailUtils sendMailUtils;
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	public void gather(){
@@ -23,6 +25,16 @@ public class AuTask {
 			priceService.addPrice(prices);
 		}catch(Exception e){
 			log.error("gather采集出现异常。e=", e);
+		}
+	}
+	public void sendDownMail(){
+		try{
+			String res = priceService.downAnalyse();
+			if(!res.equals("")){
+				sendMailUtils.sendSimpleMail(res);
+			}
+		}catch(Exception e){
+			log.error("下跌分析异常。e=",e);
 		}
 	}
 
@@ -40,5 +52,11 @@ public class AuTask {
 
 	public void setGather(Gather gather) {
 		this.gather = gather;
+	}
+	public SendMailUtils getSendMailUtils() {
+		return sendMailUtils;
+	}
+	public void setSendMailUtils(SendMailUtils sendMailUtils) {
+		this.sendMailUtils = sendMailUtils;
 	}
 }
