@@ -2,6 +2,7 @@ package com.au.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,8 @@ public class PriceDao {
 	public int addPrice(final List<Price> p) throws Exception{
 		String sql = "insert into price(id,ename,cname,zxj,kpj,zgj,zdj,zdf,zsj,gxsj) "
 				+ "values(replace(uuid(),'-',''),?,?,?,?,?,?,?,?,?)";
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
 		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -42,7 +45,7 @@ public class PriceDao {
 				ps.setDouble(6, price.getZdj());
 				ps.setDouble(7, price.getZdf());
 				ps.setDouble(8, price.getZsj());
-				ps.setString(9, price.getGxsj());
+				ps.setString(9, sdf.format(price.getGxsj()));
 			}
 			@Override
 			public int getBatchSize() {

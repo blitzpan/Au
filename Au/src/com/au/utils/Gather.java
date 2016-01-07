@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -76,6 +77,7 @@ public class Gather {
             String[] strArr = null;
             Price price = null;
             String zdf = "";
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             while(m.find()){
             	tempStr = m.group();
                 log.debug(tempStr);
@@ -95,7 +97,8 @@ public class Gather {
                 }
                 price.setZdf(StrUtils.str2Double(zdf));
                 price.setZsj(StrUtils.str2Double(strArr[5]));
-                price.setGxsj(strArr[16]);
+                
+                price.setGxsj(sdf.parse(strArr[16]));
                 res.add(price);
             }
 		}

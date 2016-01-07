@@ -1,5 +1,7 @@
 package com.au.entity;
 
+import java.util.Date;
+
 public class Price {
 	private String id;
 	private String ename;
@@ -10,7 +12,7 @@ public class Price {
 	private double zdj;
 	private double zdf;
 	private double zsj;
-	private String gxsj;
+	private Date gxsj;
 	
 	public String getId() {
 		return id;
@@ -66,15 +68,15 @@ public class Price {
 	public void setZsj(double zsj) {
 		this.zsj = zsj;
 	}
-	public String getGxsj() {
-		return gxsj;
-	}
-	public void setGxsj(String gxsj) {
-		this.gxsj = gxsj;
-	}
 	@Override
 	public String toString() {
 		return "price [id=" + id + ", ename=" + ename + ", cname=" + cname + ", zxj=" + zxj + ", kpj=" + kpj + ", zgj="
 				+ zgj + ", zdj=" + zdj + ", zdf=" + zdf + ", zsj=" + zsj + ", gxsj=" + gxsj + "]";
+	}
+	public Date getGxsj() {
+		return gxsj;
+	}
+	public void setGxsj(Date gxsj) {
+		this.gxsj = gxsj;
 	}
 }

@@ -2,13 +2,82 @@
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
+    <script src="/js/jquery-1.8.2.js"></script>
 </head>
+<script>
+$(function(){
+	var zdj = [];//最低价
+	var zgj = [];//最高价
+	var zxj = [];//最新价
+	var kpj = [];//开盘价
+	var zdf = [];//涨跌幅
+	$("#queryBtn").click(function(){
+		$.ajax({
+			url:"/priceCon/queryPrices.action",
+			data:{},
+			type:"post",
+			success:function(data){
+				console.log(data);
+				if(data.state!=1){
+					alert("查询数据出现异常！");
+				}else{
+					/*
+					option.series[0].data=data.res;
+					myChart.setOption(option, true);
+					*/
+					$.each(data.res, function(i,item){
+						console.log(item);
+						zdj.push([
+						        new Date(item.gxsj),
+						        item.zdj,
+						        item.zdf
+						        ]);
+						zgj.push([
+							        new Date(item.gxsj),
+							        item.zgj,
+							        item.zdf
+							        ]);
+						zxj.push([
+							        new Date(item.gxsj),
+							        item.zxj,
+							        item.zdf
+							        ]);
+						kpj.push([
+							        new Date(item.gxsj),
+							        item.kpj,
+							        item.zdf
+							        ]);
+						zdf.push([
+							        new Date(item.gxsj),
+							        item.zdf,
+							        item.zdf
+							        ]);
+					});
+					option.series[0].data=zxj;
+					option.series[1].data=zdj;
+					option.series[2].data=zgj;
+					option.series[3].data=kpj;
+					myChart.setOption(option, true);
+					
+				}
+			},
+			error:function(request,state,e){
+				alert("异常！");
+			}
+			
+		});
+	});
+});
+</script>
 <body>
+	<button id="queryBtn">查询</button>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main" style="height:400px"></div>
     <!-- ECharts单文件引入 -->
     <script src="/echarts-2.2.7/dist/echarts.js"></script>
     <script type="text/javascript">
+		var myChart;
+		var option;
         // 路径配置
         require.config({
             paths: {
@@ -24,9 +93,8 @@
             ],
             function (ec) {
                 // 基于准备好的dom，初始化echarts图表
-                var myChart = ec.init(document.getElementById('main')); 
-                
-                var option = {
+                myChart = ec.init(document.getElementById('main')); 
+                option = {
                	    title : {
                	        text : '时间坐标折线图',
                	        subtext : 'dataZoom支持'
@@ -41,8 +109,7 @@
                	                   + date.getHours() + ':'
                	                   + date.getMinutes();
                	            return data + '<br/>'
-               	                   + params.value[1] + ', ' 
-               	                   + params.value[2];
+               	                   + params.value[1] + ',' + params.value[2];
                	        }
                	    },
                	    toolbox: {
@@ -59,7 +126,7 @@
                	        start : 70
                	    },
                	    legend : {
-               	        data : ['series1']
+               	        data : ['最新价','最低价','最高价','开盘价']
                	    },
                	    grid: {
                	        y2: 80
@@ -77,20 +144,16 @@
                	    ],
                	    series : [
                	        {
-               	            name: 'series1',
+               	            name: '最新价',
                	            type: 'line',
                	            showAllSymbol: true,
-               	            symbolSize: function (value){
-               	                return Math.round(value[2]/10) + 2;
-               	            },
+               	            symbolSize: 2,
                	            data: (function () {
                	                var d = [];
                	                var len = 0;
-               	                var now = new Date();
-               	                var value;
-               	                while (len++ < 200) {
+               	                while (len++ < 4) {
                	                    d.push([
-               	                        new Date(2014, 9, 1, 0, len * 10000),
+               	                        new Date(1452129198000 + (len * 1000)),
                	                        (Math.random()*30).toFixed(2) - 0,
                	                        (Math.random()*100).toFixed(2) - 0
                	                    ]);
@@ -99,30 +162,37 @@
                	            })()
                	        },
                	     	{
-            	            name: 'series2',
+            	            name: '最低价',
             	            type: 'line',
             	            showAllSymbol: true,
-            	            symbolSize: function (value){
-            	                return Math.round(value[2]/10) + 2;
-            	            },
+            	            symbolSize: 2,
             	            data: (function () {
-            	                var d = [];
-            	                var len = 0;
-            	                var now = new Date();
-            	                var value;
-            	                while (len++ < 200) {
-            	                    d.push([
-            	                        new Date(2014, 9, 1, 0, len * 10002),
-            	                        (Math.random()*30).toFixed(2) - 0,
-            	                        (Math.random()*100).toFixed(2) - 0
-            	                    ]);
-            	                }
-            	                return d;
+            	            	var d = [];
+               	                return d;
             	            })()
-            	        }
+            	        },
+	               	    {
+	         	            name: '最高价',
+	         	            type: 'line',
+	         	            showAllSymbol: true,
+	         	            symbolSize: 2,
+	         	            data: (function () {
+	         	            	var d = [];
+	            	                return d;
+	         	            })()
+	         	        },
+	               	    {
+	         	            name: '开盘价',
+	         	            type: 'line',
+	         	            showAllSymbol: true,
+	         	            symbolSize: 2,
+	         	            data: (function () {
+	         	            	var d = [];
+	            	                return d;
+	         	            })()
+	         	        }
                	    ]
                	};
-        
                 // 为echarts对象加载数据 
                 myChart.setOption(option); 
             }
