@@ -6,11 +6,12 @@
 	<title></title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="<%=basePath%>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<script src="/js/jquery-1.8.2.js"></script>
-	<script src="/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script src="/bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
+	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
+	<script src="js/jquery-1.8.2.js"></script>
+	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -19,7 +20,7 @@
     <![endif]-->
 	<style>
 	</style>
-	<script language="javascript" type="text/javascript" src="/My97DatePicker/WdatePicker.js"></script>
+	<script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
 </head>
 <script>
 $(function(){
@@ -36,7 +37,7 @@ function query(){
 	var kpj = [];//开盘价
 	var zdf = [];//涨跌幅
 	$.ajax({
-		url:"/priceCon/queryPrices.action",
+		url:"priceCon/queryPrices.action",
 		data:{
 			"startTime":$("#startTime").val(),
 			"endTime":$("#endTime").val()
@@ -117,14 +118,14 @@ function query(){
 				<!-- 画图开始。为ECharts准备一个具备大小（宽高）的Dom -->
 			    <div id="main" style="height:400px"></div>
 			    <!-- ECharts单文件引入 -->
-			    <script src="/echarts-2.2.7/dist/echarts.js"></script>
+			    <script src="echarts-2.2.7/dist/echarts.js"></script>
 			    <script type="text/javascript">
 					var myChart;
 					var option;
 			        // 路径配置
 			        require.config({
 			            paths: {
-			                echarts: '/echarts-2.2.7/dist'
+			                echarts: 'echarts-2.2.7/dist'
 			            }
 			        });
 			        
