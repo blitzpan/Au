@@ -41,7 +41,7 @@
 	<!-- 加载邮件配置文件，之所以不写两个placeholder，是因为两个的话只加载了第一个，第二个没反应。
 	应该把两个properties文件放在一个location中，当中用逗号分隔
 	 -->
-    <context:property-placeholder location="classpath:jdbc.properties" />
+    <context:property-placeholder location="classpath:jdbc.properties,classpath:mail.properties" />
     
 	<!-- 定义数据源 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -95,4 +95,23 @@
     </bean>
     <!-- 在网上抄的配置事务，不明白 -->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- 配置邮件信息 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host">
+			<value>${mail.host}</value>
+		</property>
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">${mail.auth}</prop>
+				<prop key="mail.smtp.timeout">${mail.timeout}</prop>
+			</props>
+		</property>
+		<property name="username">
+			<value>${mail.username}</value>
+		</property>
+		<property name="password">
+			<value>${mail.password}</value>
+		</property>
+	</bean>
+	<!-- 配置邮件信息结束 -->
 </beans>
