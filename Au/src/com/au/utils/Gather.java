@@ -48,7 +48,7 @@ public class Gather {
 	}
 
 	public String convertStreamToString(InputStream is) throws Exception {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is, "gb2312"));
 		StringBuilder sb = new StringBuilder();
 		String line = null;
 		try {
@@ -75,6 +75,7 @@ public class Gather {
             String tempStr = "";
             String[] strArr = null;
             Price price = null;
+            String zdf = "";
             while(m.find()){
             	tempStr = m.group();
                 log.debug(tempStr);
@@ -88,7 +89,11 @@ public class Gather {
                 price.setKpj(StrUtils.str2Double(strArr[6]));
                 price.setZgj(StrUtils.str2Double(strArr[7]));
                 price.setZdj(StrUtils.str2Double(strArr[8]));
-                price.setZdf(StrUtils.str2Double(strArr[17]));
+                zdf = strArr[17];
+                if(zdf.endsWith("%")){
+                	zdf = zdf.substring(0, zdf.length()-1);
+                }
+                price.setZdf(StrUtils.str2Double(zdf));
                 price.setZsj(StrUtils.str2Double(strArr[5]));
                 price.setGxsj(strArr[16]);
                 res.add(price);

@@ -3,9 +3,11 @@ package com.au.dao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -48,5 +50,19 @@ public class PriceDao {
 			}
 		});
 		return 0;
+	}
+	/**
+	 * @Description:查询时间范围内的数据 
+	 * @param @param parm
+	 * @param @return
+	 * @param @throws Exception   
+	 * @return List<Price>  
+	 * @throws
+	 * @author Panyk
+	 * @date 2016年1月7日
+	 */
+	public List<Price> queryPrices(Map parm) throws Exception{
+		String sql = "select * from price where gxsj>=? and gxsj<=?";
+		return jdbcTemplate.query(sql, new Object[]{parm.get("startTime"), parm.get("endTime")}, new BeanPropertyRowMapper<>(Price.class));
 	}
 }
