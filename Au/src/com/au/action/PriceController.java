@@ -34,9 +34,10 @@ public class PriceController {
 				endTime = sdf.format(c.getTime());
 			}
 			if(startTime == null || startTime.trim().equals("")){
-				c.add(Calendar.MONTH, -1);
+				c.add(Calendar.DATE, -2);
 				startTime = sdf.format(c.getTime());
 			}
+			log.info("queryPrices=" + startTime + "-" + endTime);
 			Map parm = new HashMap();
 			parm.put("startTime", startTime);
 			parm.put("endTime", endTime);
