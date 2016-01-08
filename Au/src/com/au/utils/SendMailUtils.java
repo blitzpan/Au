@@ -14,6 +14,7 @@ public class SendMailUtils extends Thread{
 	@Autowired
 	private FreeMarkerConfigurer freemarkerConfiguration;
 	*/
+	private String title;
 	private String msg;
 	
 	
@@ -37,7 +38,7 @@ public class SendMailUtils extends Thread{
 		try {
 			mail.setTo("1028353676@qq.com");// 接受者
 			mail.setFrom("youxiangformajia@163.com");// 发送者,和xml中的一致
-			mail.setSubject("邮件测试");// 主题
+			mail.setSubject(title);// 主题
 			mail.setText(msg);// 邮件内容
 			mailSender.send(mail);
 		} catch (Exception e) {
@@ -141,5 +142,11 @@ public class SendMailUtils extends Thread{
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
 	}
 }

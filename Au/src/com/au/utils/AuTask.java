@@ -31,6 +31,8 @@ public class AuTask {
 		try{
 			String res = priceService.downAnalyse();
 			if(!res.equals("")){
+				sendMailUtils.setTitle("下跌");
+				res = "【下跌】\n" + res;
 				sendMailUtils.sendSimpleMail(res);
 			}
 		}catch(Exception e){
@@ -41,6 +43,8 @@ public class AuTask {
 		try{
 			String res = priceService.upAnalyse();
 			if(!res.equals("")){
+				sendMailUtils.setTitle("上涨");
+				res = "【上涨】\n" + res;
 				sendMailUtils.sendSimpleMail(res);
 			}
 		}catch(Exception e){
