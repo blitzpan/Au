@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.au.entity.Constent;
 import com.au.entity.Price;
 
 @Repository
@@ -29,8 +30,8 @@ public class PriceDao {
 	 * @date 2016年1月5日
 	 */
 	public int addPrice(final List<Price> p) throws Exception{
-		String sql = "insert into price(id,ename,cname,zxj,kpj,zgj,zdj,zdf,zsj,gxsj) "
-				+ "values(replace(uuid(),'-',''),?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into price(id,ename,cname,zxj,kpj,zgj,zdj,zdf,zsj,gxsj,cjsj) "
+				+ "values(replace(uuid(),'-',''),?,?,?,?,?,?,?,?,?,now())";
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		
 		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
@@ -81,4 +82,17 @@ public class PriceDao {
 		String sql = "SELECT * from price limit 0,1";
 		return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper(Price.class));
 	}
+	/**
+	 * @Description:获取最新的n条distinct记录 
+	 * @param @return
+	 * @param @throws Exception   
+	 * @return List<Price>  
+	 * @throws
+	 * @author Panyk
+	 * @date 2016年1月8日
+	 */
+	public List<Price> queryTopPrices(int n) throws Exception{
+		String sql = "SELECT DISTINCT ename,cname,zxj,kpj,zgj,zdj,zdf,zsj,gxsj from price ORDER BY gxsj desc LIMIT 0,?";
+		return jdbcTemplate.query(sql, new Object[]{n}, new BeanPropertyRowMapper(Price.class));
+	} 
 }

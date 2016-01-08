@@ -37,6 +37,16 @@ public class AuTask {
 			log.error("下跌分析异常。e=",e);
 		}
 	}
+	public void sendUpMail(){
+		try{
+			String res = priceService.upAnalyse();
+			if(!res.equals("")){
+				sendMailUtils.sendSimpleMail(res);
+			}
+		}catch(Exception e){
+			log.error("上涨分析异常。e=",e);
+		}
+	}
 
 	public PriceService getPriceService() {
 		return priceService;

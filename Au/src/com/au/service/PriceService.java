@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.au.dao.PriceDao;
+import com.au.entity.Constent;
 import com.au.entity.Price;
 
 @Service
@@ -42,10 +43,43 @@ public class PriceService {
 	}
 	public String downAnalyse() throws Exception{
 		String res="";
-		Price p = priceDao.queryLastPrice();
-		if(p.getKpj() > p.getZxj()){
+		List<Price> pL = priceDao.queryTopPrices(Constent.downCount);
+		boolean down = true;
+		for(int i=0; i<Constent.downCount-1; i++){
+			if(pL.get(i).getZxj() > pL.get(i+1).getZxj()){
+				down = false;
+				break;
+			}
+		}
+		if(down){
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			res += sdf.format(p.getGxsj()) + " 开盘价：" + p.getKpj() + " 最新价："+ p.getZxj() + "\n" + p;
+			for(Price p : pL){
+				res += sdf.format(p.getGxsj()) + "    最新价="+ p.getZxj() + "\n";
+			}
+		}
+		return res;
+	}
+	public String upAnalyse() throws Exception{
+		String res="";
+		List<Price> pL = priceDao.queryTopPrices(Constent.up_downCount + Constent.up_upCount);
+		boolean up = true;
+		for(int i=0; i<Constent.up_upCount-1; i++){
+			if(pL.get(i).getZxj() < pL.get(i+1).getZxj()){
+				up = false;
+				break;
+			}
+		}
+		for(int i=Constent.up_upCount; i < (Constent.up_downCount+Constent.up_upCount-1); i++){
+			if(pL.get(i).getZxj() > pL.get(i+1).getZxj()){
+				up = false;
+				break;
+			}
+		}
+		if(up){
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			for(Price p : pL){
+				res += sdf.format(p.getGxsj()) + "    最新价="+ p.getZxj() + "\n";
+			}
 		}
 		return res;
 	}
