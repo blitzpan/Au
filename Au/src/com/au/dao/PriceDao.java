@@ -95,4 +95,8 @@ public class PriceDao {
 		String sql = "SELECT DISTINCT ename,cname,zxj,kpj,zgj,zdj,zdf,zsj,gxsj from price ORDER BY gxsj desc LIMIT 0,?";
 		return jdbcTemplate.query(sql, new Object[]{n}, new BeanPropertyRowMapper(Price.class));
 	} 
+	public int queryPricesCount(Price p) throws Exception{
+		String sql = "select count(*) from price where ename=? and gxsj=?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{p.getEname(), p.getGxsj()}, Integer.class);
+	}
 }
