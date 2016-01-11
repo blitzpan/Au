@@ -20,9 +20,17 @@ public class PriceService {
 	private PriceDao priceDao;
 	private Logger log = Logger.getLogger(this.getClass());
 
-	public void addPrice(List p) throws Exception {
+	public void addPrice(List pL) throws Exception {
 		try{
-			priceDao.addPrice(p);
+			//排除已经采集的数据
+			Price tempP;
+			for(int i=pL.size()-1; i>=0; i--){
+				tempP = (Price)pL.get(i);
+				if(priceDao.queryPricesCount(tempP) > 0){
+					pL.remove(i);
+				}
+			}
+			priceDao.addPrice(pL);
 		}catch(Exception e){
 			log.error("addPrice新增采集结果异常！", e);
 			throw e;
@@ -64,7 +72,7 @@ public class PriceService {
 		List<Price> pL = priceDao.queryTopPrices(Constent.up_downCount + Constent.up_upCount);
 		boolean up = true;
 		for(int i=0; i<Constent.up_upCount-1; i++){
-			if(pL.get(i).getZxj() < pL.get(i+1).getZxj()){
+			if(pL.get(i).getZxj() <= pL.get(i+1).getZxj()){
 				up = false;
 				break;
 			}
