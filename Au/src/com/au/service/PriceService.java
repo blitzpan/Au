@@ -54,7 +54,7 @@ public class PriceService {
 		List<Price> pL = priceDao.queryTopPrices(Constent.downCount);
 		boolean down = true;
 		for(int i=0; i<Constent.downCount-1; i++){
-			if(pL.get(i).getZxj() > pL.get(i+1).getZxj()){
+			if(pL.get(i).getZxj() >= pL.get(i+1).getZxj()){
 				down = false;
 				break;
 			}
