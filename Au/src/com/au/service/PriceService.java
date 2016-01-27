@@ -91,4 +91,13 @@ public class PriceService {
 		}
 		return res;
 	}
+	public String getPrices(int count) throws Exception{
+		String res="";
+		List<Price> pL = priceDao.queryTopPrices(count);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		for(Price p : pL){
+			res += sdf.format(p.getGxsj()) + " 最新价="+ p.getZxj() + "\n";
+		}
+		return res;
+	}
 }

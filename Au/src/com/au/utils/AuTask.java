@@ -51,6 +51,19 @@ public class AuTask {
 			log.error("上涨分析异常。e=",e);
 		}
 	}
+	
+	public void sendPriceMail(){
+		try{
+			String res = priceService.getPrices(10);
+			if(!res.equals("")){
+				sendMailUtils.setTitle("实时价格");
+				res = "【实时价格】\n" + res;
+				sendMailUtils.sendSimpleMail(res);
+			}
+		}catch(Exception e){
+			log.error("发送价格异常。e=", e);
+		}
+	}
 
 	public PriceService getPriceService() {
 		return priceService;
