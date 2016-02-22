@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.au.entity.Constent;
 import com.au.entity.Price;
 import com.au.service.PriceService;
 
@@ -30,7 +31,10 @@ public class AuTask {
 	public void sendDownMail(){
 		try{
 			String res = priceService.downAnalyse();
-			if(!res.equals("")){
+			String time = res.substring(0, 19);
+			log.debug("time=" + time);
+			if(!res.equals("") && !time.equals(Constent.downSendTime)){
+				Constent.downSendTime = time;
 				sendMailUtils.setTitle("下跌");
 				res = "【下跌】\n" + res;
 				sendMailUtils.sendSimpleMail(res);
@@ -42,7 +46,10 @@ public class AuTask {
 	public void sendUpMail(){
 		try{
 			String res = priceService.upAnalyse();
-			if(!res.equals("")){
+			String time = res.substring(0, 19);
+			log.debug("time=" + time);
+			if(!res.equals("") && !time.equals(Constent.upSendTime)){
+				Constent.upSendTime = time;
 				sendMailUtils.setTitle("上涨");
 				res = "【上涨】\n" + res;
 				sendMailUtils.sendSimpleMail(res);
