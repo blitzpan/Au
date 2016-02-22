@@ -35,9 +35,9 @@
 	 -->
 	<task:scheduled-tasks> 
 		<task:scheduled ref="auTask" method="gather" cron="0 0/10 * * * ?"/>
-		<task:scheduled ref="auTask" method="sendDownMail" cron="0 0/8 8-23 * * 1/5"/>
-		<task:scheduled ref="auTask" method="sendUpMail" cron="0 0/8 8-23 * * 1/5"/>
-		<task:scheduled ref="auTask" method="sendPriceMail" cron="0 45 14 * * 1/5"/>
+		<task:scheduled ref="auTask" method="sendDownMail" cron="0 0/8 8-23 * * ?"/>
+		<task:scheduled ref="auTask" method="sendUpMail" cron="0 0/8 8-23 * * ?"/>
+		<task:scheduled ref="auTask" method="sendPriceMail" cron="0 45 14 * * ?"/>
 	</task:scheduled-tasks>
 	<!---->
 	<!-- 加载数据库配置文件 -->

@@ -99,7 +99,10 @@ public class Gather {
                 price.setZsj(StrUtils.str2Double(strArr[5]));
                 
                 price.setGxsj(sdf.parse(strArr[16]));
-                res.add(price);
+                //当最新价不为0的时候入库
+                if(price.getZxj() - 0 > 0.0001){
+                	res.add(price);
+                }
             }
 		}
 		return res;
