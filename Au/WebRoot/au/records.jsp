@@ -47,7 +47,7 @@ $(function(){
 								<input id="gram" type="number" class="form-control" min=0.00000 placeHolder="重量：克"/>
 							</div>
 							<div class="col-sm-3">
-								<input id="yuan" type="number" class="form-control" min=0.00 placeHolder="单价：元"/>
+								<input id="price" type="number" class="form-control" min=0.00 placeHolder="单价：元"/>
 							</div>
 							<div class="col-sm-3">
 								<input id="operTime" class="form-control" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="操作时间">
