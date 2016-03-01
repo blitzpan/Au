@@ -24,6 +24,12 @@
 </head>
 <script>
 $(function(){
+	$("#addRecord").click(function(){
+		window.location.href="./au/records.jsp";
+	});
+	$("#showRecord").click(function(){
+		alert('show');
+	});
 	$("#queryBtn").click(function(){
 		query();
 	});
@@ -36,6 +42,7 @@ function query(){
 	var zxj = [];//最新价
 	var kpj = [];//开盘价
 	var zdf = [];//涨跌幅
+    var zsj = [];//昨收价
 	$.ajax({
 		url:"priceCon/queryPrices.action",
 		data:{
@@ -44,7 +51,7 @@ function query(){
 		},
 		type:"post",
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			if(data.state!=1){
 				alert("查询数据出现异常！");
 			}else{
@@ -78,11 +85,17 @@ function query(){
 						        item.zdf,
 						        item.zdf
 						        ]);
+                    zsj.push([
+						        new Date(item.gxsj),
+						        item.zsj,
+						        item.zsj
+						        ]);
 				});
 				option.series[0].data=zxj;
 				option.series[1].data=zdj;
 				option.series[2].data=zgj;
 				option.series[3].data=kpj;
+                option.series[4].data=zsj;
 				myChart.setOption(option, true);
 			}
 		},
@@ -108,6 +121,8 @@ function query(){
 					<input id="endTime" class="form-control" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="结束时间">
 				</div>
 				<button id="queryBtn" type="button" class="btn btn-primary">查询</button>
+				<button id="addRecord" type="button" class="btn btn-info">新增记录</button>
+				<button id="showRecordBtn" type="button" class="btn btn-info">查看记录</button>
 			</form>
 			</div>
 		</div>
@@ -170,7 +185,7 @@ function query(){
 			               	        start : 0
 			               	    },
 			               	    legend : {
-			               	        data : ['最新价','最低价','最高价','开盘价']
+			               	        data : ['最新价','最低价','最高价','开盘价','昨收价']
 			               	    },
 			               	    grid: {
 			               	        y2: 80
@@ -219,6 +234,16 @@ function query(){
 				         	        },
 				               	    {
 				         	            name: '开盘价',
+				         	            type: 'line',
+				         	            showAllSymbol: true,
+				         	            symbolSize: 2,
+				         	            data: (function () {
+				         	            	var d = [];
+				            	                return d;
+				         	            })()
+				         	        },
+                                    {
+				         	            name: '昨收价',
 				         	            type: 'line',
 				         	            showAllSymbol: true,
 				         	            symbolSize: 2,

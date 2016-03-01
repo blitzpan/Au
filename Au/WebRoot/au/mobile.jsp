@@ -44,7 +44,7 @@ function query(){
 		},
 		type:"post",
 		success:function(data){
-			console.log(data);
+			//console.log(data);
 			if(data.state!=1){
 				alert("查询数据出现异常！");
 			}else{
