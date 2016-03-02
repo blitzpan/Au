@@ -44,7 +44,7 @@ $(function(){
 				$("#dataList").append("<tr><th>单价</th><th>质量</th><th>总计</th><th>利润</th></tr>")
 				.append("<tr class='success'><td>"+price+"</td><td>"+data.res.gram+"</td><td>"+data.res.amount.toFixed(4)+"</td><td>"+data.res.profit.toFixed(4)+"</td></tr>");
 				$.each(data.res.list,function(i,item){
-					$("#dataList").append("<tr><td>"+item.price+"</td><td>"+(item.gram-item.sellgram)+"</td><td>"+((item.gram-item.sellgram)*price).toFixed(4)+"</td><td>"+(item.gram-item.sellgram)*(price-item.price).toFixed(4)+"</td></tr>");
+					$("#dataList").append("<tr><td>"+item.price+"</td><td>"+(item.gram-item.sellgram)+"</td><td>"+((item.gram-item.sellgram)*price).toFixed(4)+"</td><td>"+((item.gram-item.sellgram)*(price-item.price)).toFixed(4)+"</td></tr>");
 				});
 			},
 			error:function(request,status,e){

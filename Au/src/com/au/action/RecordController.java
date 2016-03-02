@@ -46,4 +46,20 @@ public class RecordController {
 		}
 		return res;
 	}
+	@RequestMapping(value="/getAllArticle")
+	public ModelAndView getAllArticle(Page page,QueryParm qp){
+		ModelAndView mv = new ModelAndView();
+		Res res = new Res();
+		try{
+			res.setSuccessed("翻页查询成功！", articleService.getAllArticle(page, qp));
+			System.out.println(res.getRes());
+		}catch(Exception e){
+			res.setFailed("翻页查询异常！");
+			log.error("getAllArticle", e);
+		}
+		mv.setViewName("/junxun/public/articleList");
+		mv.addObject("res",res);
+		mv.addObject("page", page);
+		return mv;
+	}
 }

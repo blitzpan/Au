@@ -137,10 +137,15 @@ function clearAddForm(){
 		</div>
 		</div>
 		<div class="row">
-		<div class="panel panel-default">
-			<div class="panel-body">
-			</div>
-		</div>
+			<table class="table table-hover">
+				<tr>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+					<td>1</td>
+				</tr>
+			</table>
+			<jsp:include page="./page.jsp"></jsp:include>
 		</div>
 	</div>
 </body>
