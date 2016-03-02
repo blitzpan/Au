@@ -9,9 +9,10 @@
     <base href="<%=basePath%>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/jquery-2.0.0.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
+	<script src="js/public.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,9 +26,58 @@
 <script>
 $(function(){
 	$("#addRecord").click(function(){
-		
+		var gram = $("#gram").val();
+		var price = $("#price").val();
+		var time = $("#operTime").val();
+		if($("#type")==''){
+			$.messager.alert("请选择类型！");
+			$("#type").focus();
+			return;
+		}
+		if(gram==''){
+			$.messager.alert("质量不能为空！");
+			$("#gram").focus();
+			return;
+		}
+		if(price==''){
+			$.messager.alert("单价不能为空！");
+			$("#price").focus();
+			return;
+		}
+		if(time==''){
+			$.messager.alert("时间不能为空！");
+			$("#operTime").focus();
+			return;
+		}
+		showLoading();
+		$.ajax({
+			type:"POST",
+			url:"recordCon/addRecord.action",
+			data:{
+				"gram":gram,
+				"price":price,
+				"time":time,
+				"type":$("#type").val()
+			},
+			success:function(data){
+				hideLoading();
+				$.messager.popup("保存成功！");
+				clearAddForm();
+			},
+			error:function(request,status,e){
+				hideLoading();
+				$.messager.alert("警告", "网络出现异常！");
+			}
+		});
 	});
+	initLoading();
 });
+function clearAddForm(){
+	$("#type").val("");
+	$("#gram").val("");
+	$("#price").val("");
+	$("#operTime").val("");
+}
 </script>
 <body>
 	<div class="container">
@@ -39,6 +89,7 @@ $(function(){
 						<div class="form-group">
 							<div class="col-sm-3">
 								<select id="type" class="form-control">
+									<option value=""></option>
 									<option value="0">买入</option>
 									<option value="1">卖出</option>
 								</select>
