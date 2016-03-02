@@ -46,6 +46,7 @@ public class AuTask {
 	public void sendUpMail(){
 		try{
 			String res = priceService.upAnalyse();
+			System.out.println("res=" + res);
 			String time = res.substring(0, 19);
 			log.debug("time=" + time);
 			if(!res.equals("") && !time.equals(Constent.upSendTime)){

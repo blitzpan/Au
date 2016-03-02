@@ -9,7 +9,7 @@
     <base href="<%=basePath%>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/jquery-2.0.0.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

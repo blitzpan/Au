@@ -81,7 +81,13 @@ function clearAddForm(){
 </script>
 <body>
 	<div class="container">
-		<div><br/></div>
+		<div class="row">
+			<ul class="nav nav-tabs">
+				<li role="presentation"><a href="au">折线图</a></li>
+				<li role="presentation" class="active"><a href="au/records.jsp">记录</a></li>
+				<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
+			</ul>
+		</div>
 		<div class="row">
 			<div class="panel panel-default">
 				<div class="panel-body">

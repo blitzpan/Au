@@ -9,7 +9,7 @@
     <base href="<%=basePath%>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
-	<script src="js/jquery-1.8.2.js"></script>
+	<script src="js/jquery-2.0.0.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -24,12 +24,6 @@
 </head>
 <script>
 $(function(){
-	$("#addRecord").click(function(){
-		window.location.href="./au/records.jsp";
-	});
-	$("#showRecord").click(function(){
-		alert('show');
-	});
 	$("#queryBtn").click(function(){
 		query();
 	});
@@ -107,7 +101,13 @@ function query(){
 </script>
 <body>
 	<div class="container">
-		<div><br/></div>
+		<div class="row">
+			<ul class="nav nav-tabs">
+				<li role="presentation" class="active"><a href="au">折线图</a></li>
+				<li role="presentation"><a href="au/records.jsp">记录</a></li>
+				<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
+			</ul>
+		</div>
 		<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -121,8 +121,6 @@ function query(){
 					<input id="endTime" class="form-control" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="结束时间">
 				</div>
 				<button id="queryBtn" type="button" class="btn btn-primary">查询</button>
-				<button id="addRecord" type="button" class="btn btn-info">新增记录</button>
-				<button id="showRecordBtn" type="button" class="btn btn-info">查看记录</button>
 			</form>
 			</div>
 		</div>
