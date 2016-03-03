@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.au.dao.RecordDao;
 import com.au.entity.Record;
+import com.au.utils.Page;
 
 @Service
 @Transactional
@@ -161,5 +163,8 @@ public class RecordService {
 		res.put("profit", profit);
 		res.put("list", records);
 		return res;
+	}
+	public List getRecords(Page page,Properties p) throws Exception{
+		return recordDao.getRecords(page, p);
 	}
 }

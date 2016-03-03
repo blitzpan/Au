@@ -2,7 +2,7 @@ package com.au.utils;
 import java.util.HashMap;
 import java.util.Map;
 public class Page{
-	private static int DEFAULT_PAGE_SIZE = 2;
+	private static int DEFAULT_PAGE_SIZE = 10;
 	private int pageSize = DEFAULT_PAGE_SIZE; // 每页的记录数
 	private int pageNo = 1;// 当前页
 	private int pageSum = 1;// 总页数

@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.au.entity.Record;
+import com.au.utils.Page;
+import com.au.utils.PageUtil;
 import com.au.utils.StrUtils;
 
 @Repository
@@ -131,5 +134,40 @@ public class RecordDao {
 		}
 		sql.append(" ORDER BY price asc");
 		return jdbcTemplate.query(sql.toString(), values.toArray(), new BeanPropertyRowMapper(Record.class));
+	}
+	/**
+	 * @Description:翻页查询 
+	 * @param @param page
+	 * @param @param p
+	 * @param @return
+	 * @param @throws Exception   
+	 * @return List  
+	 * @throws
+	 * @author Panyk
+	 * @date 2016年3月3日
+	 */
+	public List getRecords(Page page,Properties p) throws Exception{
+		String sql = "SELECT id,gram,price,date_format(time, '%Y-%m-%d %H:%i:%s') time,"
+				+ " date_format(selltime, '%Y-%m-%d %H:%i:%s') selltime,amount,profit,sellgram,sellall "
+				+ " from buyrecord where 1=1";
+		Vector values = new Vector();
+		if(p.getProperty("begin").length()>0 && p.getProperty("end").length()>0){
+			sql += "  and ((time>=? and time<=?) or (selltime>=? and selltime<=?))";
+			values.add(p.getProperty("begin"));
+			values.add(p.getProperty("end"));
+			values.add(p.getProperty("begin"));
+			values.add(p.getProperty("end"));
+		}else if(p.getProperty("begin").length()>0){
+			sql += "  and (time>=? or selltime>=?)";
+			values.add(p.getProperty("begin"));
+			values.add(p.getProperty("begin"));
+		}else if(p.getProperty("end").length()>0){
+			sql += "  and (time<=? or selltime<=?)";
+			values.add(p.getProperty("begin"));
+			values.add(p.getProperty("begin"));
+		}
+		sql += " order by time asc, selltime asc";
+		page.setTotalCount(jdbcTemplate.queryForObject(PageUtil.appendCount(sql), Integer.class, values.toArray()));
+		return jdbcTemplate.query(PageUtil.appendPage(page, sql), new BeanPropertyRowMapper(Record.class), values.toArray());
 	}
 }

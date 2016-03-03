@@ -7,7 +7,7 @@ function initLoading(){
             "<h4 class='modal-title' id='myModalLabel'>提示</h4>" +
             "</div>" +
             "<div id='loadingText' class='modal-body'>" +
-            "<span class='glyphicon glyphicon-refresh' aria-hidden='true'>1</span>" +
+            "<span class='glyphicon glyphicon-refresh' aria-hidden='true'></span>" +
             "处理中，请稍候。。。" +
             "</div>" +
             "</div>" +

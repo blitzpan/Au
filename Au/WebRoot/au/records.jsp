@@ -70,6 +70,10 @@ $(function(){
 			}
 		});
 	});
+	//查询
+	$("#queryRecord").click(function(){
+		query();
+	});
 	initLoading();
 });
 function clearAddForm(){
@@ -77,6 +81,46 @@ function clearAddForm(){
 	$("#gram").val("");
 	$("#price").val("");
 	$("#operTime").val("");
+}
+function query(page){
+	showLoading();
+	$.ajax({
+		type:"POST",
+		url:"recordCon/getRecords.action",
+		data:{
+			"begin":$("#startTime").val(),
+			"end":$("#endTime").val(),
+			"pageNo":page==null?"1":page
+		},
+		success:function(data){
+			hideLoading();
+			console.log(data);
+			$("#recordTable").empty();
+			$("#recordTable").append("<tr><th>利润</th><th>剩余质量</th><th>买入质量</th><th>买入价格</th>"
+				+"<th>买入时间</th><th>买入总额</th><th>卖出质量</th><th>卖出时间</th></tr>");
+			$.each(data.res.list,function(i,item){
+				$("#recordTable").append("<tr "+(item.sellall==1?"calss='warning'":"")+"><td>"+(item.profit==0?"":item.profit.toFixed(4))+"</td><td>"+(item.gram-item.sellgram).toFixed(4)+"</td>"
+					+"<td>"+item.gram.toFixed(4)+"</td><td>"+item.price.toFixed(4)+"</td><td>"+item.time+"</td>"
+					+"<td>"+(item.gram*item.price).toFixed(4)+"</td><td>"+(item.sellgram==0?"":item.sellgram.toFixed(4))+"</td><td>"+(item.selltime==null?"":item.selltime)+"</td></tr>");
+			});
+			createPage(data.res.page);
+		},error:function(request,status,e){
+			hideLoading();
+			$.messager.alert("警告", "网络出现异常！");
+		}
+	});
+}
+function createPage(page){
+	$("#page").empty();
+	var pageHtml = "<nav><ul class='pagination pagination-lg' style='margin:0px auto'>";
+	pageHtml += "<li"+(page.hasPrevious?"":" class='disabled'")+"><a href='javascript:void(0)' onclick='query("+(page.pageNo-1)+")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
+	
+	for(i=page.startPage;i<=page.endPage;i++){
+		pageHtml+="<li "+(i==page.pageNo?"class='disabled'":"")+"><a href='javascript:void(0)' onclick='query("+page.pageNo+")'>"+i+"</a></li>";
+	}
+	pageHtml += "<li"+ (page.hasNext?"":" class='disabled'")+"><a href='javascript:void(0)' onclick='query("+(page.pageNo+1)+")' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
+	pageHtml += "</ul></nav>";
+	$("#page").append(pageHtml);
 }
 </script>
 <body>
@@ -137,15 +181,20 @@ function clearAddForm(){
 		</div>
 		</div>
 		<div class="row">
-			<table class="table table-hover">
+			<table id="recordTable" class="table table-hover">
 				<tr>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
-					<td>1</td>
+					<th>利润</th>
+					<th>剩余质量</th>
+					<th>买入质量</th>
+					<th>买入价格</th>
+					<th>买入时间</th>
+					<th>买入总额</th>
+					<th>卖出质量</th>
+					<th>卖出价格</th>
+					<th>卖出时间</th>
 				</tr>
 			</table>
-			<jsp:include page="./page.jsp"></jsp:include>
+			<div id="page"></div>
 		</div>
 	</div>
 </body>

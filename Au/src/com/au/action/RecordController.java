@@ -1,5 +1,9 @@
 package com.au.action;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.au.entity.Record;
 import com.au.entity.Res;
 import com.au.service.RecordService;
+import com.au.utils.Page;
 
 @Controller
 @RequestMapping(value="/recordCon")
@@ -46,20 +51,33 @@ public class RecordController {
 		}
 		return res;
 	}
-	@RequestMapping(value="/getAllArticle")
-	public ModelAndView getAllArticle(Page page,QueryParm qp){
-		ModelAndView mv = new ModelAndView();
+	/**
+	 * @Description:record翻页查询 
+	 * @param @param page
+	 * @param @param begin
+	 * @param @param end
+	 * @param @return   
+	 * @return Object  
+	 * @throws
+	 * @author Panyk
+	 * @date 2016年3月3日
+	 */
+	@RequestMapping(value="/getRecords")
+	@ResponseBody
+	public Object getRecords(Page page,String begin,String end){
 		Res res = new Res();
 		try{
-			res.setSuccessed("翻页查询成功！", articleService.getAllArticle(page, qp));
-			System.out.println(res.getRes());
+			Properties p = new Properties();
+			p.put("begin", begin);
+			p.put("end", end);
+			Map resMap = new HashMap();
+			resMap.put("list", recordService.getRecords(page,p));
+			resMap.put("page", page);
+			res.setSuccessed("查询完成！", resMap);
 		}catch(Exception e){
-			res.setFailed("翻页查询异常！");
-			log.error("getAllArticle", e);
+			log.error("getRecords=", e);
+			res.setFailed("程序发生异常！");
 		}
-		mv.setViewName("/junxun/public/articleList");
-		mv.addObject("res",res);
-		mv.addObject("page", page);
-		return mv;
+		return res;
 	}
 }

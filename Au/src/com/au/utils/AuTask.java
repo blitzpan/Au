@@ -31,8 +31,7 @@ public class AuTask {
 	public void sendDownMail(){
 		try{
 			String res = priceService.downAnalyse();
-			String time = res.substring(0, 19);
-			log.debug("time=" + time);
+			String time = res.length()>0?res.substring(0, 19):"";
 			if(!res.equals("") && !time.equals(Constent.downSendTime)){
 				Constent.downSendTime = time;
 				sendMailUtils.setTitle("下跌");
@@ -46,9 +45,7 @@ public class AuTask {
 	public void sendUpMail(){
 		try{
 			String res = priceService.upAnalyse();
-			System.out.println("res=" + res);
-			String time = res.substring(0, 19);
-			log.debug("time=" + time);
+			String time = res.length()>0?res.substring(0, 19):"";
 			if(!res.equals("") && !time.equals(Constent.upSendTime)){
 				Constent.upSendTime = time;
 				sendMailUtils.setTitle("上涨");
