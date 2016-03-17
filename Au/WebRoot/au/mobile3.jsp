@@ -11,7 +11,9 @@
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	<script src="js/jquery-2.0.0.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<!-- 
 	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
+	 -->
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -36,7 +38,6 @@ function query(){
 	var zxj = [];//最新价
 	var kpj = [];//开盘价
 	var zdf = [];//涨跌幅
-    var zsj = [];//昨收价
 	$.ajax({
 		url:"priceCon/queryPrices.action",
 		data:{
@@ -60,36 +61,30 @@ function query(){
 					        item.zdf
 					        ]);
 					zgj.push([
-						        new Date(item.gxsj),
-						        item.zgj,
-						        item.zdf
-						        ]);
+					        new Date(item.gxsj),
+					        item.zgj,
+					        item.zdf
+					        ]);
 					zxj.push([
-						        new Date(item.gxsj),
-						        item.zxj,
-						        item.zdf
-						        ]);
+					        new Date(item.gxsj),
+					        item.zxj,
+					        item.zdf
+					        ]);
 					kpj.push([
-						        new Date(item.gxsj),
-						        item.kpj,
-						        item.zdf
-						        ]);
+					        new Date(item.gxsj),
+					        item.kpj,
+					        item.zdf
+					        ]);
 					zdf.push([
-						        new Date(item.gxsj),
-						        item.zdf,
-						        item.zdf
-						        ]);
-                    zsj.push([
-						        new Date(item.gxsj),
-						        item.zsj,
-						        item.zsj
-						        ]);
+					        new Date(item.gxsj),
+					        item.zdf,
+					        item.zdf
+					        ]);
 				});
 				option.series[0].data=zxj;
 				option.series[1].data=zdj;
 				option.series[2].data=zgj;
 				option.series[3].data=kpj;
-                option.series[4].data=zsj;
 				myChart.setOption(option, true);
 			}
 		},
@@ -101,13 +96,7 @@ function query(){
 </script>
 <body>
 	<div class="container">
-		<div class="row">
-			<ul class="nav nav-tabs">
-				<li role="presentation" class="active"><a href="au">折线图</a></li>
-				<li role="presentation"><a href="au/records.jsp">记录</a></li>
-				<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
-			</ul>
-		</div>
+		<div><br/></div>
 		<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -131,31 +120,13 @@ function query(){
 				<!-- 画图开始。为ECharts准备一个具备大小（宽高）的Dom -->
 			    <div id="main" style="height:400px"></div>
 			    <!-- ECharts单文件引入 -->
-			    <script src="echarts-2.2.7/dist/echarts.js"></script>
+			    <script src="echarts-3.1.3/echarts.common.min.js"></script>
 			    <script type="text/javascript">
 					var myChart;
 					var option;
-			        // 路径配置
-			        require.config({
-			            paths: {
-			                echarts: 'echarts-2.2.7/dist'
-			            }
-			        });
-			        
-			        // 使用
-			        require(
-			            [
-			                'echarts',
-			                'echarts/chart/line' // 使用柱状图就加载bar模块，按需加载
-			            ],
-			            function (ec) {
 			                // 基于准备好的dom，初始化echarts图表
-			                myChart = ec.init(document.getElementById('main')); 
+			                myChart = echarts.init(document.getElementById('main')); 
 			                option = {
-			               	    title : {
-			               	        text : 'AU9999价格',
-			               	        subtext : '10min采集一次'
-			               	    },
 			               	    tooltip : {
 			               	        trigger: 'item',
 			               	        formatter : function (params) {
@@ -173,90 +144,66 @@ function query(){
 			               	        show : true,
 			               	        feature : {
 			               	            mark : {show: true},
-			               	            dataView : {show: true, readOnly: false},
 			               	            restore : {show: true},
 			               	            saveAsImage : {show: true}
 			               	        }
 			               	    },
-			               	    dataZoom: {
-			               	        show: true,
-			               	        start : 1,
-			               	        end:99
-			               	    },
+			               	    dataZoom: [
+		               	            {
+		               	                type: 'slider',
+		               	                realtime: true,
+		               	                start: 1,
+		               	                end: 99,
+		               	            }
+		               	        ],
 			               	    legend : {
-			               	        data : ['最新价','最低价','最高价','开盘价','昨收价']
+			               	        data : ['最新价','最低价','最高价','开盘价'],
+			               	        x:'center'
 			               	    },
 			               	    grid: {
-			               	        y2: 80
+			               	    	bottom: 80
 			               	    },
 			               	    xAxis : [
 			               	        {
-			               	            type : 'time',
-			               	            splitNumber:10
+			               	        	type : 'time',
 			               	        }
 			               	    ],
 			               	    yAxis : [
 			               	        {
-			               	            type : 'value'
+			               	            type : 'value',
+			               	         	scale:true//设置为true代表坐标轴不会强制包含0，就这个功能我找了够2小时，可是坑死了 
 			               	        }
 			               	    ],
 			               	    series : [
 			               	        {
 			               	            name: '最新价',
 			               	            type: 'line',
-			               	            showAllSymbol: true,
-			               	            symbolSize: 2,
-			               	            data: (function () {
-			               	                var d = [];
-			               	                return d;
-			               	            })()
+			               	        	symbolSize: 4,
+			               	            data: []
 			               	        },
 			               	     	{
 			            	            name: '最低价',
 			            	            type: 'line',
-			            	            showAllSymbol: true,
-			            	            symbolSize: 2,
-			            	            data: (function () {
-			            	            	var d = [];
-			               	                return d;
-			            	            })()
+			            	            symbolSize: 4,
+			            	            data: []
 			            	        },
 				               	    {
 				         	            name: '最高价',
 				         	            type: 'line',
-				         	            showAllSymbol: true,
-				         	            symbolSize: 2,
-				         	            data: (function () {
-				         	            	var d = [];
-				            	                return d;
-				         	            })()
+				         	           	symbolSize: 4,
+				         	            data: []
 				         	        },
 				               	    {
 				         	            name: '开盘价',
 				         	            type: 'line',
-				         	            showAllSymbol: true,
-				         	            symbolSize: 2,
-				         	            data: (function () {
-				         	            	var d = [];
-				            	                return d;
-				         	            })()
-				         	        },
-                                    {
-				         	            name: '昨收价',
-				         	            type: 'line',
-				         	            showAllSymbol: true,
-				         	            symbolSize: 2,
-				         	            data: (function () {
-				         	            	var d = [];
-				            	                return d;
-				         	            })()
+				         	           	symbolSize: 4,
+				         	            data: []
 				         	        }
 			               	    ]
 			               	};
-							// 为echarts对象加载数据 
-							//myChart.setOption(option); 
-			            }
-			        );
+							window.onresize = function() {
+				                myChart.resize();
+				            }
 			    </script>
 			    <!-- 画图结束 -->
 			</div>

@@ -163,7 +163,8 @@ function query(){
 			               	    },
 			               	    dataZoom: {
 			               	        show: true,
-			               	        start : 0
+			               	        start : 1,
+			               	        end:99
 			               	    },
 			               	    legend : {
 			               	        data : ['最新价','最低价','最高价','开盘价']
