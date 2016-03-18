@@ -154,7 +154,7 @@ function query(){
                	                type: 'slider',
                	                realtime: true,
                	                start: 1,
-               	                end: 99,
+               	                end: 100
                	            }
                	        ],
 	               	    legend : {
