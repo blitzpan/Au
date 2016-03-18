@@ -66,7 +66,7 @@ public class PriceDao {
 	 * @date 2016年1月7日
 	 */
 	public List<Price> queryPrices(Map parm) throws Exception{
-		String sql = "select * from price where gxsj>=? and gxsj<=? order by gxsj asc";
+		String sql = "SELECT zxj,kpj,zgj,zdj,zdf,zsj,gxsj from price where gxsj>=? and gxsj<=? order by gxsj asc";
 		return jdbcTemplate.query(sql, new Object[]{parm.get("startTime"), parm.get("endTime")}, new BeanPropertyRowMapper<>(Price.class));
 	}
 	/**

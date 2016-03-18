@@ -54,29 +54,31 @@ function query(){
 					alert("没有查询到任何数据！");
 					return;
 				}
+				var gxsj;
 				$.each(data.res, function(i,item){
+					gxsj = new Date(item.gxsj);
 					zdj.push([
-					        new Date(item.gxsj),
+					        gxsj,
 					        item.zdj,
 					        item.zdf
 					        ]);
 					zgj.push([
-					        new Date(item.gxsj),
+					        gxsj,
 					        item.zgj,
 					        item.zdf
 					        ]);
 					zxj.push([
-					        new Date(item.gxsj),
+					        gxsj,
 					        item.zxj,
 					        item.zdf
 					        ]);
 					kpj.push([
-					        new Date(item.gxsj),
+					        gxsj,
 					        item.kpj,
 					        item.zdf
 					        ]);
 					zdf.push([
-					        new Date(item.gxsj),
+					        gxsj,
 					        item.zdf,
 					        item.zdf
 					        ]);
@@ -124,86 +126,88 @@ function query(){
 			    <script type="text/javascript">
 					var myChart;
 					var option;
-			                // 基于准备好的dom，初始化echarts图表
-			                myChart = echarts.init(document.getElementById('main')); 
-			                option = {
-			               	    tooltip : {
-			               	        trigger: 'item',
-			               	        formatter : function (params) {
-			               	            var date = new Date(params.value[0]);
-			               	            data = date.getFullYear() + '-'
-			               	                   + (date.getMonth() + 1) + '-'
-			               	                   + date.getDate() + ' '
-			               	                   + date.getHours() + ':'
-			               	                   + date.getMinutes();
-			               	            return data + '<br/>'
-			               	                   + params.value[1] + ',' + params.value[2];
-			               	        }
-			               	    },
-			               	    toolbox: {
-			               	        show : true,
-			               	        feature : {
-			               	            mark : {show: true},
-			               	            restore : {show: true},
-			               	            saveAsImage : {show: true}
-			               	        }
-			               	    },
-			               	    dataZoom: [
-		               	            {
-		               	                type: 'slider',
-		               	                realtime: true,
-		               	                start: 1,
-		               	                end: 99,
-		               	            }
-		               	        ],
-			               	    legend : {
-			               	        data : ['最新价','最低价','最高价','开盘价'],
-			               	        x:'center'
-			               	    },
-			               	    grid: {
-			               	    	bottom: 80
-			               	    },
-			               	    xAxis : [
-			               	        {
-			               	        	type : 'time',
-			               	        }
-			               	    ],
-			               	    yAxis : [
-			               	        {
-			               	            type : 'value',
-			               	         	scale:true//设置为true代表坐标轴不会强制包含0，就这个功能我找了够2小时，可是坑死了 
-			               	        }
-			               	    ],
-			               	    series : [
-			               	        {
-			               	            name: '最新价',
-			               	            type: 'line',
-			               	        	symbolSize: 4,
-			               	            data: []
-			               	        },
-			               	     	{
-			            	            name: '最低价',
-			            	            type: 'line',
-			            	            symbolSize: 4,
-			            	            data: []
-			            	        },
-				               	    {
-				         	            name: '最高价',
-				         	            type: 'line',
-				         	           	symbolSize: 4,
-				         	            data: []
-				         	        },
-				               	    {
-				         	            name: '开盘价',
-				         	            type: 'line',
-				         	           	symbolSize: 4,
-				         	            data: []
-				         	        }
-			               	    ]
-			               	};
-							window.onresize = function() {
-				                myChart.resize();
-				            }
+	                // 基于准备好的dom，初始化echarts图表
+	                myChart = echarts.init(document.getElementById('main')); 
+	                option = {
+	               	    tooltip : {
+	               	        trigger: 'item',
+	               	        formatter : function (params) {
+	               	            var date = new Date(params.value[0]);
+	               	            data = (date.getMonth() + 1) + '-'
+	               	                   + date.getDate() + ' '
+	               	                   + date.getHours() + ':'
+	               	                   + date.getMinutes();
+	               	            return data + '<br/>'
+	               	                   + params.value[1] + ',' + params.value[2];
+	               	        }
+	               	    },
+	               	    toolbox: {
+	               	        show : true,
+	               	        feature : {
+	               	            mark : {show: true},
+	               	            restore : {show: true},
+	               	            saveAsImage : {show: true}
+	               	        }
+	               	    },
+	               	    dataZoom: [
+               	            {
+               	                type: 'slider',
+               	                realtime: true,
+               	                start: 1,
+               	                end: 99,
+               	            }
+               	        ],
+	               	    legend : {
+	               	        data : ['最新价','最低价','最高价','开盘价'],
+	               	        x:'center'
+	               	    },
+	               	    grid: {
+	               	    	bottom: 80,
+	               	    	left:20,
+	               	    	right:10,
+	               	    	top:10
+	               	    },
+	               	    xAxis : [
+	               	        {
+	               	        	type : 'time',
+	               	        }
+	               	    ],
+	               	    yAxis : [
+	               	        {
+	               	            type : 'value',
+	               	         	scale:true//设置为true代表坐标轴不会强制包含0，就这个功能我找了够2小时，可是坑死了 
+	               	        }
+	               	    ],
+	               	    series : [
+	               	        {
+	               	            name: '最新价',
+	               	            type: 'line',
+	               	        	symbolSize: 4,
+	               	            data: []
+	               	        },
+	               	     	{
+	            	            name: '最低价',
+	            	            type: 'line',
+	            	            symbolSize: 4,
+	            	            data: []
+	            	        },
+		               	    {
+		         	            name: '最高价',
+		         	            type: 'line',
+		         	           	symbolSize: 4,
+		         	            data: []
+		         	        },
+		               	    {
+		         	            name: '开盘价',
+		         	            type: 'line',
+		         	           	symbolSize: 4,
+		         	            data: []
+		         	        }
+	               	    ]
+	               	};
+					window.onresize = function() {
+		                myChart.resize();
+		            }
 			    </script>
 			    <!-- 画图结束 -->
 			</div>

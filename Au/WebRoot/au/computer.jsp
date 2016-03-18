@@ -53,36 +53,38 @@ function query(){
 					alert("没有查询到任何数据！");
 					return;
 				}
+				var gxsj;
 				$.each(data.res, function(i,item){
+					gxsj = new Date(item.gxsj);
 					zdj.push([
-					        new Date(item.gxsj),
+					        gxsj,
 					        item.zdj,
 					        item.zdf
 					        ]);
 					zgj.push([
-						        new Date(item.gxsj),
+						        gxsj,
 						        item.zgj,
 						        item.zdf
 						        ]);
 					zxj.push([
-						        new Date(item.gxsj),
+						        gxsj,
 						        item.zxj,
 						        item.zdf
 						        ]);
 					kpj.push([
-						        new Date(item.gxsj),
+						        gxsj,
 						        item.kpj,
 						        item.zdf
 						        ]);
 					zdf.push([
-						        new Date(item.gxsj),
+						        gxsj,
 						        item.zdf,
 						        item.zdf
 						        ]);
                     zsj.push([
-						        new Date(item.gxsj),
+						        gxsj,
 						        item.zsj,
-						        item.zsj
+						        item.zdf
 						        ]);
 				});
 				option.series[0].data=zxj;

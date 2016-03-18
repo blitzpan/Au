@@ -52,32 +52,34 @@ function query(){
 					alert("没有查询到任何数据！");
 					return;
 				}
+				var gxsj;
 				$.each(data.res, function(i,item){
+					gxsj = new Date(item.gxsj);
 					zdj.push([
-					        new Date(item.gxsj),
-					        item.zdj,
-					        item.zdf
-					        ]);
+				        gxsj,
+				        item.zdj,
+				        item.zdf
+			        ]);
 					zgj.push([
-						        new Date(item.gxsj),
-						        item.zgj,
-						        item.zdf
-						        ]);
+				        gxsj,
+				        item.zgj,
+				        item.zdf
+			        ]);
 					zxj.push([
-						        new Date(item.gxsj),
-						        item.zxj,
-						        item.zdf
-						        ]);
+				        gxsj,
+				        item.zxj,
+				        item.zdf
+			        ]);
 					kpj.push([
-						        new Date(item.gxsj),
-						        item.kpj,
-						        item.zdf
-						        ]);
+				        gxsj,
+				        item.kpj,
+				        item.zdf
+			        ]);
 					zdf.push([
-						        new Date(item.gxsj),
-						        item.zdf,
-						        item.zdf
-						        ]);
+				        gxsj,
+				        item.zdf,
+				        item.zdf
+			        ]);
 				});
 				option.series[0].data=zxj;
 				option.series[1].data=zdj;
@@ -167,7 +169,8 @@ function query(){
 			               	        end:99
 			               	    },
 			               	    legend : {
-			               	        data : ['最新价','最低价','最高价','开盘价']
+			               	        data : ['最新价','最低价','最高价','开盘价'],
+			               	     	x:'left'
 			               	    },
 			               	    grid: {
 			               	        y2: 80
