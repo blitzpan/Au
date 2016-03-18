@@ -159,11 +159,11 @@ function query(){
                	        ],
 	               	    legend : {
 	               	        data : ['最新价','最低价','最高价','开盘价'],
-	               	        x:'center'
+	               	        x:'left'
 	               	    },
 	               	    grid: {
 	               	    	bottom: 80,
-	               	    	left:20,
+	               	    	left:30,
 	               	    	right:10,
 	               	    	top:10
 	               	    },
