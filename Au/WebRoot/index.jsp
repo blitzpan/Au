@@ -22,9 +22,9 @@ system.mac = p.indexOf("Mac") == 0;
 system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
 //跳转语句
 if(system.win||system.mac||system.xll){//转向后台登陆页面
-    window.location.href="./computer.jsp";
+    window.location.href="./au/computer.jsp";
 }else{
-    window.location.href="./mobile.jsp";
+    window.location.href="./au/mobile.jsp";
 }
 </script>
 </body>
