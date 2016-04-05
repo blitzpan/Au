@@ -127,7 +127,7 @@ function createPage(page){
 	<div class="container">
 		<div class="row">
 			<ul class="nav nav-tabs">
-				<li role="presentation"><a href="au">折线图</a></li>
+				<li role="presentation"><a href="">折线图</a></li>
 				<li role="presentation" class="active"><a href="au/records.jsp">记录</a></li>
 				<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
 			</ul>
