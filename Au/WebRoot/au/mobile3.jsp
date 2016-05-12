@@ -122,7 +122,7 @@ function query(){
 				<!-- 画图开始。为ECharts准备一个具备大小（宽高）的Dom -->
 			    <div id="main" style="height:400px"></div>
 			    <!-- ECharts单文件引入 -->
-			    <script src="echarts-3.1.3/echarts.common.min.js"></script>
+			    <script src="js/echarts.min.js"></script>
 			    <script type="text/javascript">
 					var myChart;
 					var option;
