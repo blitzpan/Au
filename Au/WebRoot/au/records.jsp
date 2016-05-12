@@ -116,7 +116,7 @@ function createPage(page){
 	pageHtml += "<li"+(page.hasPrevious?"":" class='disabled'")+"><a href='javascript:void(0)' onclick='query("+(page.pageNo-1)+")' aria-label='Previous'><span aria-hidden='true'>&laquo;</span></a></li>";
 	
 	for(i=page.startPage;i<=page.endPage;i++){
-		pageHtml+="<li "+(i==page.pageNo?"class='disabled'":"")+"><a href='javascript:void(0)' onclick='query("+page.pageNo+")'>"+i+"</a></li>";
+		pageHtml+="<li "+(i==page.pageNo?"class='disabled'":"")+"><a href='javascript:void(0)' onclick='query("+i+")'>"+i+"</a></li>";
 	}
 	pageHtml += "<li"+ (page.hasNext?"":" class='disabled'")+"><a href='javascript:void(0)' onclick='query("+(page.pageNo+1)+")' aria-label='Next'><span aria-hidden='true'>&raquo;</span></a></li>";
 	pageHtml += "</ul></nav>";
