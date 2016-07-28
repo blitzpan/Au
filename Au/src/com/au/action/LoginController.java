@@ -41,4 +41,16 @@ public class LoginController {
 		}
 		return res;
 	}
+	@RequestMapping(value="/logout")
+	@ResponseBody
+	public Object logout(HttpSession session){
+		Res res = new Res();
+		try{
+			session.removeAttribute("user");
+		}catch(Exception e){
+			log.error("logout=", e);
+			res.setFailed("退出发生异常！");
+		}
+		return res;
+	}
 }

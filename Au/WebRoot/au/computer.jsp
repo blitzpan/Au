@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	<script src="js/jquery-2.0.0.min.js"></script>
+	<script src="js/public.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -104,11 +105,16 @@ function query(){
 <body>
 	<div class="container">
 		<div class="row">
-			<ul class="nav nav-tabs">
-				<li role="presentation" class="active"><a href="">折线图</a></li>
-				<li role="presentation"><a href="au/records.jsp">记录</a></li>
-				<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
-			</ul>
+			<div class="col-lg-11" style="padding:0px">
+				<ul class="nav nav-tabs">
+					<li role="presentation" class="active"><a href="">折线图</a></li>
+					<li role="presentation"><a href="au/records.jsp">记录</a></li>
+					<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
+				</ul>
+			</div>
+			<div class="col-lg-1" style="padding:0px;">
+				<a href="javascript:void(0)" onclick="javascript:logout();" class="btn btn-default" style="float:right" role="button">退出</a>
+			</div>
 		</div>
 		<div class="row">
 		<div class="panel panel-default">
