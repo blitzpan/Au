@@ -1,7 +1,5 @@
 package com.au.entity;
 
-import java.util.Date;
-
 public class Record {
 	private int type;
 	//买入
