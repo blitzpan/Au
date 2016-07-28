@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.au.entity.Record;
 import com.au.entity.Res;
+import com.au.entity.User;
 import com.au.service.RecordService;
 import com.au.utils.Page;
 
@@ -31,6 +32,8 @@ public class RecordController {
 	public Object addRecord(HttpSession session,@ModelAttribute("record") Record record) {
 		Res res = new Res();
 		try{
+			User user = (User) session.getAttribute("user");
+			record.setUserName(user.getName());
 			log.debug("addRecord=" + record);
 			res.setSuccessed("添加记录成功！", recordService.addRecord(record));
 		}catch(Exception e){
@@ -41,9 +44,11 @@ public class RecordController {
 	}
 	@RequestMapping(value="/analyse")
 	@ResponseBody
-	public Object analyse(@ModelAttribute("record") Record record){
+	public Object analyse(HttpSession session, @ModelAttribute("record") Record record){
 		Res res = new Res();
 		try{
+			User user = (User) session.getAttribute("user");
+			record.setUserName(user.getName());
 			res.setSuccessed("分析完成！", recordService.analyse(record));
 		}catch(Exception e){
 			log.error("analyse=", e);
@@ -64,12 +69,14 @@ public class RecordController {
 	 */
 	@RequestMapping(value="/getRecords")
 	@ResponseBody
-	public Object getRecords(Page page,String begin,String end){
+	public Object getRecords(HttpSession session, Page page,String begin,String end){
 		Res res = new Res();
 		try{
+			User user = (User)session.getAttribute("user");
 			Properties p = new Properties();
 			p.put("begin", begin);
 			p.put("end", end);
+			p.put("userName", user.getName());
 			Map resMap = new HashMap();
 			resMap.put("list", recordService.getRecords(page,p));
 			resMap.put("page", page);

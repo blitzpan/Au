@@ -33,8 +33,8 @@ public class RecordDao {
 	 * @date 2016年3月2日
 	 */
 	public int addBuyRecord(Record record) throws Exception{
-		String sql = "insert into buyrecord(id,gram,price,time,amount) values(REPLACE(uuid(),'-',''),?,?,?,?)";
-		return jdbcTemplate.update(sql, new Object[]{record.getGram(),record.getPrice(),record.getTime(),record.getAmount()});
+		String sql = "insert into buyrecord(id,gram,price,time,amount,username) values(REPLACE(uuid(),'-',''),?,?,?,?,?)";
+		return jdbcTemplate.update(sql, new Object[]{record.getGram(),record.getPrice(),record.getTime(),record.getAmount(),record.getUserName() });
 	}
 	/**
 	 * @Description:查询满足条件的记录 
@@ -51,6 +51,9 @@ public class RecordDao {
 		Vector values = new Vector();
 		if(record.getSellall()!=-1){//-1是没有任何意义的。
 			sql.append(" and sellall=" + record.getSellall());
+		}
+		if(record.getUserName()!=null){
+			sql.append(" and username=" + record.getUserName());
 		}
 		sql.append(" ORDER BY price asc");
 		return jdbcTemplate.query(sql.toString(), values.toArray(), new BeanPropertyRowMapper(Record.class));
@@ -94,7 +97,7 @@ public class RecordDao {
 	 */
 	public void batchAddSellRecord(final List<Record> rs) throws Exception{
 		final Date time = StrUtils.str2Date(rs.get(0).getTime());
-		String sql = "insert into sellRecord(id,gram,price,amount,buyid,time,profit) values(REPLACE(uuid(),'-',''),?,?,?,?,?,?)";
+		String sql = "insert into sellRecord(id,gram,price,amount,buyid,time,profit,username) values(REPLACE(uuid(),'-',''),?,?,?,?,?,?,?)";
 		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
 			@Override
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -105,6 +108,7 @@ public class RecordDao {
 				ps.setString(4, r.getBuyid());
 				ps.setString(5, r.getTime());
 				ps.setDouble(6, r.getProfit());
+				ps.setString(7, r.getUserName());
 			}
 			@Override
 			public int getBatchSize() {
@@ -131,6 +135,10 @@ public class RecordDao {
 		if(record.getPrice()-0>0.00001){//找出所有价格小于当前价格的
 			sql.append(" and price<?");
 			values.add(record.getPrice());
+		}
+		if(record.getUserName()!=null){
+			sql.append(" and username=?");
+			values.add(record.getUserName());
 		}
 		sql.append(" ORDER BY price asc");
 		return jdbcTemplate.query(sql.toString(), values.toArray(), new BeanPropertyRowMapper(Record.class));
@@ -165,6 +173,10 @@ public class RecordDao {
 			sql += "  and (time<=? or selltime<=?)";
 			values.add(p.getProperty("begin"));
 			values.add(p.getProperty("begin"));
+		}
+		if(p.getProperty("userName", "").length() > 0){
+			sql += " and username=?";
+			values.add(p.getProperty("userName"));
 		}
 		sql += " order by time asc, selltime asc";
 		page.setTotalCount(jdbcTemplate.queryForObject(PageUtil.appendCount(sql), Integer.class, values.toArray()));

@@ -14,6 +14,7 @@ public class Record {
 	private int sellall=0;
 	//卖出
 	private String buyid;
+	private String userName;
 	
 	public String getId() {
 		return id;
@@ -86,6 +87,12 @@ public class Record {
 	}
 	public void setSelltime(String selltime) {
 		this.selltime = selltime;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 

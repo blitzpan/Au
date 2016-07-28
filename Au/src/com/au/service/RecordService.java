@@ -73,6 +73,7 @@ public class RecordService {
 			List addList = new ArrayList();
 			Record temp = new Record();
 			temp.setSellall(0);
+			temp.setUserName(r.getUserName());
 			List<Record> records = recordDao.queryRecord(temp);//所有没有卖出的
 			double notSell = 0;//未卖重量
 			Record addR = null;
@@ -96,6 +97,7 @@ public class RecordService {
 					addR.setBuyid(tempR.getId());
 					addR.setProfit(r.getGram() * (r.getPrice()-tempR.getPrice()));
 					r.setGram(0);
+					addR.setUserName(r.getUserName());
 					addList.add(addR);
 					break;
 				}else{//未卖质量<=要卖质量，部分卖
@@ -113,6 +115,7 @@ public class RecordService {
 					addR.setAmount(notSell * r.getPrice());
 					addR.setBuyid(tempR.getId());
 					addR.setProfit(notSell * (r.getPrice()-tempR.getPrice()));
+					addR.setUserName(r.getUserName());
 					r.setGram(r.getGram() - notSell);
 					addList.add(addR);
 				}
@@ -124,6 +127,7 @@ public class RecordService {
 				addR.setTime(r.getTime());
 				addR.setAmount(r.getGram() * r.getPrice());
 				addR.setProfit(r.getGram() * r.getPrice());
+				addR.setUserName(r.getUserName());
 				addList.add(addR);
 			}
 			recordDao.batchUpdateBuyRecord(upList);

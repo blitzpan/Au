@@ -61,8 +61,13 @@ $(function(){
 			},
 			success:function(data){
 				hideLoading();
-				$.messager.popup("保存成功！");
-				clearAddForm();
+				if(data.state==1){
+					clearAddForm();
+					$.messager.popup("保存成功！");
+					query();
+				}else{
+					$.messager.popup(data.msg);
+				}
 			},
 			error:function(request,status,e){
 				hideLoading();
@@ -94,7 +99,7 @@ function query(page){
 		},
 		success:function(data){
 			hideLoading();
-			console.log(data);
+			//console.log(data);
 			$("#recordTable").empty();
 			$("#recordTable").append("<tr><th>利润</th><th>剩余质量</th><th>买入质量</th><th>买入价格</th>"
 				+"<th>买入时间</th><th>买入总额</th><th>卖出质量</th><th>卖出时间</th></tr>");
