@@ -42,6 +42,7 @@ $(function(){
 			},
 			type:'post',
 			success:function(data){
+				hideLoading();
 				if(data.state==1){
 					window.location.href="<%=basePath %>";
 				}else{
@@ -49,6 +50,7 @@ $(function(){
 				}
 			},
 			error:function(request,status,e){
+				hideLoading();
 				$("#tip").html("网络异常，请刷新后重新登陆！").show();
 			}
 		});
