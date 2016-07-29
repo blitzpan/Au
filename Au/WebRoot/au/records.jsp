@@ -79,7 +79,6 @@ $(function(){
 	$("#queryRecord").click(function(){
 		query();
 	});
-	initLoading();
 });
 function clearAddForm(){
 	$("#type").val("");
@@ -88,7 +87,7 @@ function clearAddForm(){
 	$("#operTime").val("");
 }
 function query(page){
-	showLoading();
+	//showLoading();
 	$.ajax({
 		type:"POST",
 		url:"recordCon/getRecords.action",

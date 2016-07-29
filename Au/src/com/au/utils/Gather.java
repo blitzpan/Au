@@ -16,12 +16,14 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.log4j.Logger;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.au.entity.Constent;
 import com.au.entity.Price;
 
 @Component
+@Scope("prototype")
 public class Gather {
 	private Logger log = Logger.getLogger(this.getClass());
 

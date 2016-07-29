@@ -9,18 +9,18 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-	<!-- Spring ApplicationContexté…ç½®æ–‡ä»¶çš„è·¯å¾„ å¯ä½¿ç”¨é€šé…ç¬¦ï¼Œå¤šä¸ªè·¯å¾„ç”¨,å·åˆ†éš”æ­¤å‚æ•°ç”¨äºŽåŽé¢çš„Spring-Context loader -->
+	<!-- Spring ApplicationContextÅäÖÃÎÄ¼þµÄÂ·¾¶ ¿ÉÊ¹ÓÃÍ¨Åä·û£¬¶à¸öÂ·¾¶ÓÃ,ºÅ·Ö¸ô´Ë²ÎÊýÓÃÓÚºóÃæµÄSpring-Context loader -->
 	<!-- 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/applicationContext.xml</param-value>
 	</context-param>
 	 -->
-  <!-- å¯åŠ¨IOCå®¹å™¨çš„ServletContextListener -->
+  <!-- Æô¶¯IOCÈÝÆ÷µÄServletContextListener -->
   <!-- <listener>
   	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener> -->
-  <!-- è¿‡æ»¤ä¸­æ–‡å­—ç¬¦ï¼Œé˜²æ­¢ä¸­æ–‡ä¹±ç  -->
+  <!-- ¹ýÂËÖÐÎÄ×Ö·û£¬·ÀÖ¹ÖÐÎÄÂÒÂë -->
   <filter>
   	<filter-name>CharacterEncodingFilter</filter-name>
   	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -34,7 +34,7 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  <!-- æ‹¦æˆªurl-patternçš„è¯·æ±‚ï¼Œäº¤ç»™springæ¥è¿›è¡Œå¤„ç† -->
+  <!-- À¹½Øurl-patternµÄÇëÇó£¬½»¸øspringÀ´½øÐÐ´¦Àí -->
   <servlet>
   	<servlet-name>springServlet</servlet-name>
   	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
