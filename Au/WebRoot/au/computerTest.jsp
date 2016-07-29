@@ -13,7 +13,8 @@
 	<script src="js/public.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
-	<script src="js/echarts.common.3.2.2.min.js"></script>
+	<script src="js/echarts3.2.2/echarts.common.3.2.2.min.js"></script>
+	<script src="js/echarts3.2.2/theme/shine.js"></script>
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -143,7 +144,7 @@ function query(){
 					var myChart;
 					var option;
 	                // 基于准备好的dom，初始化echarts图表
-	                myChart = echarts.init(document.getElementById('main')); 
+	                myChart = echarts.init(document.getElementById('main'),'shine'); 
 	                option = {
 	               	    title : {
 	               	        text : 'AU9999价格',
@@ -179,9 +180,6 @@ function query(){
 	               	    legend : {
 	               	        data : ['最新价','最低价','最高价','开盘价','昨收价']
 	               	    },
-	               	    grid: {
-	               	        y2: 80
-	               	    },
 	               	    xAxis : [
 	               	        {
 	               	            type : 'time',
@@ -191,64 +189,52 @@ function query(){
 	               	    yAxis : [
 	               	        {
 	               	            type : 'value',
-	               	         scale:true//设置为true代表坐标轴不会强制包含0，就这个功能我找了够2小时，可是坑死了
+	               	         	scale:true//设置为true代表坐标轴不会强制包含0，就这个功能我找了够2小时，可是坑死了
 	               	        }
 	               	    ],
 	               	    series : [
 	               	        {
 	               	            name: '最新价',
 	               	            type: 'line',
-	               	            showAllSymbol: true,
+	               	            showAllSymbol: false,
 	               	            symbolSize: 2,
-	               	            data: (function () {
-	               	                var d = [];
-	               	                return d;
-	               	            })()
+	               	         	smooth:true,
+	               	            data: []
 	               	        },
 	               	     	{
 	            	            name: '最低价',
 	            	            type: 'line',
-	            	            showAllSymbol: true,
+	            	            showAllSymbol: false,
 	            	            symbolSize: 2,
-	            	            data: (function () {
-	            	            	var d = [];
-	               	                return d;
-	            	            })()
+	            	            smooth:true,
+	            	            data: []
 	            	        },
 		               	    {
 		         	            name: '最高价',
 		         	            type: 'line',
-		         	            showAllSymbol: true,
+		         	            showAllSymbol: false,
 		         	            symbolSize: 2,
-		         	            data: (function () {
-		         	            	var d = [];
-		            	                return d;
-		         	            })()
+		         	            smooth:true,
+		         	            data: []
 		         	        },
 		               	    {
 		         	            name: '开盘价',
 		         	            type: 'line',
-		         	            showAllSymbol: true,
+		         	            showAllSymbol: false,
 		         	            symbolSize: 2,
-		         	            data: (function () {
-		         	            	var d = [];
-		            	                return d;
-		         	            })()
+		         	            smooth:true,
+		         	            data: []
 		         	        },
                                   {
 		         	            name: '昨收价',
 		         	            type: 'line',
-		         	            showAllSymbol: true,
+		         	            showAllSymbol: false,
 		         	            symbolSize: 2,
-		         	            data: (function () {
-		         	            	var d = [];
-		            	                return d;
-		         	            })()
+		         	           smooth:true,
+		         	            data: []
 		         	        }
 	               	    ]
 	               	};
-					// 为echarts对象加载数据 
-					//myChart.setOption(option); 
 			    </script>
 			    <!-- 画图结束 -->
 			</div>
