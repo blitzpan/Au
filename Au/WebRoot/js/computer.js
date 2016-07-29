@@ -171,4 +171,7 @@ function initEcharts(){
  	        }
    	    ]
    	};
+    window.onresize = function() {
+        myChart.resize();
+    }
 }

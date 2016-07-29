@@ -102,4 +102,7 @@ public class PriceService {
 		}
 		return res;
 	}
+	public Map getLatestPrice() throws Exception{
+		return priceDao.getLatestPrice();
+	}
 }
