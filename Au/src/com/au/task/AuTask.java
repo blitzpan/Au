@@ -1,4 +1,4 @@
-package com.au.utils;
+package com.au.task;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.au.entity.Constent;
+import com.au.entity.Mail;
 import com.au.entity.Price;
 import com.au.service.PriceService;
 
@@ -14,20 +15,8 @@ import com.au.service.PriceService;
 public class AuTask {
 	@Autowired
 	private PriceService priceService;
-	@Autowired
-	private Gather gather;
-	@Autowired
-	private SendMailUtils sendMailUtils;
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	public void gather(){
-		try{
-			List<Price> prices = gather.gather();
-			priceService.addPrice(prices);
-		}catch(Exception e){
-			log.error("gather采集出现异常。e=", e);
-		}
-	}
 	public void sendDownMail(){
 		try{
 			String res = priceService.downAnalyse();
@@ -60,11 +49,11 @@ public class AuTask {
 	public void sendPriceMail(){
 		try{
 			String res = priceService.getPrices(10);
-			if(!res.equals("")){
-				sendMailUtils.setTitle("实时价格");
-				res = "【实时价格】\n" + res;
-				sendMailUtils.sendSimpleMail(res);
-			}
+			Mail mail = new Mail();
+			mail.setMailTo("1028353676@qq.com");
+			mail.setSubject("实时价格");
+			mail.setText(res);
+			Constent.MAIL_QUEUE.put(mail);//这个是个阻塞的方法。
 		}catch(Exception e){
 			log.error("发送价格异常。e=", e);
 		}
@@ -76,19 +65,5 @@ public class AuTask {
 
 	public void setPriceService(PriceService priceService) {
 		this.priceService = priceService;
-	}
-
-	public Gather getGather() {
-		return gather;
-	}
-
-	public void setGather(Gather gather) {
-		this.gather = gather;
-	}
-	public SendMailUtils getSendMailUtils() {
-		return sendMailUtils;
-	}
-	public void setSendMailUtils(SendMailUtils sendMailUtils) {
-		this.sendMailUtils = sendMailUtils;
 	}
 }
