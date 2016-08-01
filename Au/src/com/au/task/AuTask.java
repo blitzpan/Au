@@ -17,30 +17,10 @@ public class AuTask {
 	private PriceService priceService;
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	public void sendDownMail(){
-		try{
-			String res = priceService.downAnalyse();
-			String time = res.length()>0?res.substring(0, 19):"";
-			if(!res.equals("") && !time.equals(Constent.downSendTime)){
-				Constent.downSendTime = time;
-				sendMailUtils.setTitle("下跌");
-				res = "【下跌】\n" + res;
-				sendMailUtils.sendSimpleMail(res);
-			}
-		}catch(Exception e){
-			log.error("下跌分析异常。e=",e);
-		}
-	}
+
 	public void sendUpMail(){
 		try{
-			String res = priceService.upAnalyse();
-			String time = res.length()>0?res.substring(0, 19):"";
-			if(!res.equals("") && !time.equals(Constent.upSendTime)){
-				Constent.upSendTime = time;
-				sendMailUtils.setTitle("上涨");
-				res = "【上涨】\n" + res;
-				sendMailUtils.sendSimpleMail(res);
-			}
+			
 		}catch(Exception e){
 			log.error("上涨分析异常。e=",e);
 		}

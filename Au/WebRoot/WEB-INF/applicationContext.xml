@@ -36,7 +36,7 @@
 	</task:scheduled-tasks>
 	
 	<!--
-	<task:scheduled ref="auTask" method="sendDownMail" cron="0 0/8 8-23 * * ?"/>
+	<task:scheduled ref="auTask" method="sendDownMail" cron="0 0/8 8-23 * * ?"/><!--每八分钟一次-->
 	<task:scheduled ref="auTask" method="sendUpMail" cron="0 0/8 8-23 * * ?"/>
 	-->
 	<!-- 加载数据库配置文件 -->
