@@ -1,31 +1,19 @@
 package com.au.task;
 
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.au.entity.Constent;
 import com.au.entity.Mail;
-import com.au.entity.Price;
 import com.au.service.PriceService;
 
 @Component
 public class AuTask {
+	private Logger log = Logger.getLogger(this.getClass());
 	@Autowired
 	private PriceService priceService;
-	private Logger log = Logger.getLogger(this.getClass());
-	
 
-	public void sendUpMail(){
-		try{
-			
-		}catch(Exception e){
-			log.error("上涨分析异常。e=",e);
-		}
-	}
-	
 	public void sendPriceMail(){
 		try{
 			String res = priceService.getPrices(10);
