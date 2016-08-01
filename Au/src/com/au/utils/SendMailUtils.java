@@ -1,5 +1,6 @@
 package com.au.utils;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,6 +12,7 @@ import com.au.entity.Mail;
 @Component
 @Scope("prototype")
 public class SendMailUtils{
+	Logger log = Logger.getLogger(SendMailUtils.class);
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -26,7 +28,7 @@ public class SendMailUtils{
 			mail.setText(mB.getText());// 邮件内容
 			mailSender.send(mail);
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("sendSimpleMail error.", e);
 		}
 		return "a";
 	}

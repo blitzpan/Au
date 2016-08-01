@@ -18,7 +18,7 @@ public class AuTask {
 		try{
 			String res = priceService.getPrices(10);
 			Mail mail = new Mail();
-			mail.setMailTo("1028353676@qq.com");
+			mail.setMailTo(Constent.MAIL_TO);
 			mail.setSubject("实时价格");
 			mail.setText(res);
 			Constent.MAIL_QUEUE.put(mail);//这个是个阻塞的方法。
