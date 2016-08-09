@@ -70,9 +70,11 @@ $(function(){
 			<div style="height:50px"><h2>登陆</h2></div>
 		</div>
 	</div>
-	<div class="row" style="background:#39A6EC;height:100%-200px">
+	<div class="row" style="background:#39A6EC;">
 		<div class="col-lg-6"></div>
-		<div class="col-lg-1"></div>
+		<div class="col-lg-1">
+			<div onclick="$('#name').val('1028353676');" style="width:100px;height:100px"></div>
+		</div>
 		<div class="col-lg-3">
 			<div style="margin:80px auto;padding:50px 30px;background:#E1F2FC">
 			<form>
