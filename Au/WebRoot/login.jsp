@@ -67,13 +67,12 @@ $(function(){
 	<div class="row">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-10">
-			<div style="height:50px"><h2>登陆</h2></div>
+			<div style="height:50px" onclick="$('#name').val('1028353676');"><h2>登陆</h2></div>
 		</div>
 	</div>
 	<div class="row" style="background:#39A6EC;">
 		<div class="col-lg-6"></div>
 		<div class="col-lg-1">
-			<div onclick="$('#name').val('1028353676');" style="width:100px;height:100px"></div>
 		</div>
 		<div class="col-lg-3">
 			<div style="margin:80px auto;padding:50px 30px;background:#E1F2FC">
