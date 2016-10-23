@@ -73,10 +73,10 @@ $(function(){
 					账户登录
 				</div>
 				<div class="form-group">
-					<input type="text" class="form-control" id="name" placeholder="QQ号"/>
+					<input type="text" class="form-control" id="name" placeholder="QQ号" value='youke'/>
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" id="password" placeholder="密码"/>
+					<input type="password" class="form-control" id="password" placeholder="密码" value='youke'/>
 				</div>
 				<div id="tip" style="display:none" class="alert alert-danger" role="alert"></div>
 				<a id="login_btn" class="btn btn-primary btn-block" href="javascript:void(0)" role="button">登陆</a>

@@ -44,7 +44,7 @@ public class StrUtils {
         return new String(new BASE64Encoder().encode(resBytes));//这一行是我自己编的，不知道正常的是什么样
 	}
 	public static void main(String[] args) {
-		User u = new User("946448276", "zhangxue");
+		User u = new User("youke", "youke");
 		String res = generatePw(u);
 		System.out.println(res);
 	}

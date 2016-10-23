@@ -50,10 +50,12 @@ public class RecordDao {
 		StringBuilder sql = new StringBuilder("SELECT * from buyrecord where 1=1");
 		Vector values = new Vector();
 		if(record.getSellall()!=-1){//-1是没有任何意义的。
-			sql.append(" and sellall=" + record.getSellall());
+			sql.append(" and sellall=?");
+			values.add( record.getSellall() );
 		}
 		if(record.getUserName()!=null){
-			sql.append(" and username=" + record.getUserName());
+			sql.append(" and username=?");
+			values.add( record.getUserName() );
 		}
 		sql.append(" ORDER BY price asc");
 		return jdbcTemplate.query(sql.toString(), values.toArray(), new BeanPropertyRowMapper(Record.class));
