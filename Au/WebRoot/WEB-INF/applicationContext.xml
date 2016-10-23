@@ -31,15 +31,13 @@
 	详细说明：
 	ref参数指定的即任务类，method指定的即需要运行的方法，cron及cronExpression表达式，具体写法这里不介绍了，详情见上篇文章附录。
 	 -->
-	 <!--
 	<task:scheduled-tasks> 
-		<task:scheduled ref="auTask" method="gather" cron="0 0/10 * * * ?"/>
-		<task:scheduled ref="auTask" method="sendDownMail" cron="0 0/8 8-23 * * ?"/>
-		<task:scheduled ref="auTask" method="sendUpMail" cron="0 0/8 8-23 * * ?"/>
 		<task:scheduled ref="auTask" method="sendPriceMail" cron="0 45 14 * * ?"/>
 	</task:scheduled-tasks>
-	 -->
-	<!---->
+	<!--
+	<task:scheduled ref="auTask" method="sendDownMail" cron="0 0/8 8-23 * * ?"/>
+	<task:scheduled ref="auTask" method="sendUpMail" cron="0 0/8 8-23 * * ?"/>
+	-->
 	<!-- 加载数据库配置文件 -->
 	<!-- 加载邮件配置文件，之所以不写两个placeholder，是因为两个的话只加载了第一个，第二个没反应。
 	应该把两个properties文件放在一个location中，当中用逗号分隔

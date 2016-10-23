@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.au.entity.Constent;
 import com.au.entity.Price;
 
 @Repository
@@ -98,5 +97,9 @@ public class PriceDao {
 	public int queryPricesCount(Price p) throws Exception{
 		String sql = "select count(*) from price where ename=? and gxsj=?";
 		return jdbcTemplate.queryForObject(sql, new Object[]{p.getEname(), p.getGxsj()}, Integer.class);
+	}
+	public Map getLatestPrice() throws Exception{
+		String sql = "SELECT * from price order by gxsj desc limit 0,1";
+		return jdbcTemplate.queryForMap(sql);
 	}
 }

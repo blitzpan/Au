@@ -48,4 +48,24 @@ public class PriceController {
 		}
 		return res;
 	}
+	/**
+	 * @Description:获取最新的一条记录 
+	 * @param @return   
+	 * @return Object  
+	 * @throws
+	 * @author Panyk
+	 * @date 2016年7月29日
+	 */
+	@RequestMapping(value="/getLatestPrice")
+	@ResponseBody
+	public Object getLatestPrice(){
+		Res res = new Res();
+		try{
+			res.setSuccessed("查询完成！", priceService.getLatestPrice());
+		}catch(Exception e){
+			log.error("getLatestRecord=", e);
+			res.setFailed("程序发生异常！");
+		}
+		return res;
+	}
 }

@@ -11,13 +11,6 @@
 	<link rel="stylesheet" href="bootstrap-3.3.5-dist/css/bootstrap.min.css">
 	<script src="js/jquery-2.0.0.min.js"></script>
 	<script src="bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script src="bootstrap-3.3.5-dist/js/jquery.bootstrap.min.js"></script>
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 	<style>
 	</style>
 	<script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
@@ -192,40 +185,28 @@ function query(){
 			               	            type: 'line',
 			               	            showAllSymbol: true,
 			               	            symbolSize: 2,
-			               	            data: (function () {
-			               	                var d = [];
-			               	                return d;
-			               	            })()
+			               	            data:[]
 			               	        },
 			               	     	{
 			            	            name: '最低价',
 			            	            type: 'line',
 			            	            showAllSymbol: true,
 			            	            symbolSize: 2,
-			            	            data: (function () {
-			            	            	var d = [];
-			               	                return d;
-			            	            })()
+			            	            data:[]
 			            	        },
 				               	    {
 				         	            name: '最高价',
 				         	            type: 'line',
 				         	            showAllSymbol: true,
 				         	            symbolSize: 2,
-				         	            data: (function () {
-				         	            	var d = [];
-				            	                return d;
-				         	            })()
+				         	            data:[]
 				         	        },
 				               	    {
 				         	            name: '开盘价',
 				         	            type: 'line',
 				         	            showAllSymbol: true,
 				         	            symbolSize: 2,
-				         	            data: (function () {
-				         	            	var d = [];
-				            	                return d;
-				         	            })()
+				         	            data:[]
 				         	        }
 			               	    ]
 			               	};

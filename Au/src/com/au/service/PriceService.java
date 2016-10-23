@@ -55,6 +55,9 @@ public class PriceService {
 		String res="";
 		List<Price> pL = priceDao.queryTopPrices(Constent.downCount);
 		boolean down = true;
+		if(pL.size() < Constent.downCount){
+			return "";
+		}
 		for(int i=0; i<Constent.downCount-1; i++){
 			if(pL.get(i).getZxj() >= pL.get(i+1).getZxj()){
 				down = false;
@@ -73,6 +76,9 @@ public class PriceService {
 		String res="";
 		List<Price> pL = priceDao.queryTopPrices(Constent.up_downCount + Constent.up_upCount);
 		boolean up = true;
+		if(pL.size() < Constent.up_upCount + Constent.up_downCount){
+			return "";
+		}
 		for(int i=0; i<Constent.up_upCount-1; i++){
 			if(pL.get(i).getZxj() <= pL.get(i+1).getZxj()){
 				up = false;
@@ -101,5 +107,8 @@ public class PriceService {
 			res += sdf.format(p.getGxsj()) + " 最新价="+ p.getZxj() + "\n";
 		}
 		return res;
+	}
+	public Map getLatestPrice() throws Exception{
+		return priceDao.getLatestPrice();
 	}
 }

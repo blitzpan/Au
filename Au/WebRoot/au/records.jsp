@@ -128,53 +128,63 @@ function createPage(page){
 }
 </script>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-11" style="padding:0px">
-				<ul class="nav nav-tabs">
-					<li role="presentation"><a href="">折线图</a></li>
-					<li role="presentation" class="active"><a href="au/records.jsp">记录</a></li>
-					<li role="presentation"><a href="au/analyse.jsp">分析</a></li>
-				</ul>
-			</div>
-			<div class="col-lg-1" style="padding:0px;">
-				<a href="javascript:void(0)" onclick="javascript:logout();" class="btn btn-default" style="float:right" role="button">退出</a>
-			</div>
-		</div>
-		<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<form class="form-horizontal" role="form">
-						<div class="form-group">
-							<div class="col-sm-3">
-								<select id="type" class="form-control">
-									<option value=""></option>
-									<option value="0">买入</option>
-									<option value="1">卖出</option>
-								</select>
-							</div>
-							<div class="col-sm-3">
-								<input id="gram" type="number" class="form-control" min=0.00000 placeHolder="重量：克"/>
-							</div>
-							<div class="col-sm-3">
-								<input id="price" type="number" class="form-control" min=0.00 placeHolder="单价：元"/>
-							</div>
-							<div class="col-sm-3">
-								<input id="operTime" class="form-control" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="操作时间">
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-3">
-								<button id="addRecord" type="button" class="btn btn-primary">保存</button>
-							</div>
-						</div>
-					</form>
+<div class="container">
+	<div class="row" style="padding:0px">
+		<div class="col-lg-12">
+			<nav class="navbar navbar-default">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Au99.99</a>
 				</div>
-			</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li><a href="au/computer.jsp">折线图</a></li>
+						<li class="active"><a href="">记录</a></li>
+						<li><a href="au/analyse.jsp">分析</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="javascript:void(0)" onclick="javascript:logout();">退出</a></li>
+					</ul>
+				</div>
+			</nav>
 		</div>
-		<div class="row">
-		<div class="panel panel-default">
-			<div class="panel-body">
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+					<div class="col-lg-3">
+						<select id="type" class="form-control">
+							<option value=""></option>
+							<option value="0">买入</option>
+							<option value="1">卖出</option>
+						</select>
+					</div>
+					<div class="col-lg-3">
+						<input id="gram" type="number" class="form-control" min=0.00000 placeHolder="重量：克"/>
+					</div>
+					<div class="col-lg-3">
+						<input id="price" type="number" class="form-control" min=0.00 placeHolder="单价：元"/>
+					</div>
+					<div class="col-lg-3">
+						<input id="operTime" class="form-control" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="操作时间">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-3">
+						<button id="addRecord" type="button" class="btn btn-primary">保存</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
 			<form class="form-inline">
 				<div class="form-group">
 					<label for="startTime">开始时间</label>
@@ -184,12 +194,14 @@ function createPage(page){
 					<label for="endTime">结束时间</label>
 					<input id="endTime" class="form-control" type="text" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" placeholder="结束时间">
 				</div>
-				<button id="queryRecord" type="button" class="btn btn-primary">查询</button>
+				<div class="form-group">
+					<button id="queryRecord" type="button" class="btn btn-primary">查询</button>
+				</div>
 			</form>
-			</div>
 		</div>
-		</div>
-		<div class="row">
+	</div>
+	<div class="row" style="margin:5px">
+		<div class="col-lg-12">
 			<table id="recordTable" class="table table-hover">
 				<tr>
 					<th>利润</th>
@@ -206,4 +218,5 @@ function createPage(page){
 			<div id="page"></div>
 		</div>
 	</div>
+</div>
 </body>

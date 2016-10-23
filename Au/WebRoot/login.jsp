@@ -42,6 +42,7 @@ $(function(){
 			},
 			type:'post',
 			success:function(data){
+				hideLoading();
 				if(data.state==1){
 					window.location.href="<%=basePath %>";
 				}else{
@@ -49,9 +50,15 @@ $(function(){
 				}
 			},
 			error:function(request,status,e){
+				hideLoading();
 				$("#tip").html("网络异常，请刷新后重新登陆！").show();
 			}
 		});
+	});
+	$("#password").keydown(function() {
+		if (event.keyCode == "13") {//keyCode=13是回车键
+			$('#login_btn').click();
+		}
 	});
 });
 </script>
@@ -60,12 +67,13 @@ $(function(){
 	<div class="row">
 		<div class="col-lg-2"></div>
 		<div class="col-lg-10">
-			<div style="height:50px"><h2>登陆</h2></div>
+			<div style="height:50px" onclick="$('#name').val('1028353676');"><h2>登陆</h2></div>
 		</div>
 	</div>
-	<div class="row" style="background:#39A6EC;height:100%-200px">
+	<div class="row" style="background:#39A6EC;">
 		<div class="col-lg-6"></div>
-		<div class="col-lg-1"></div>
+		<div class="col-lg-1">
+		</div>
 		<div class="col-lg-3">
 			<div style="margin:80px auto;padding:50px 30px;background:#E1F2FC">
 			<form>
