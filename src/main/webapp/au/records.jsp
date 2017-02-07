@@ -21,7 +21,7 @@
     <![endif]-->
 	<style>
 	</style>
-	<script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+	<script language="javascript" type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 </head>
 <script>
 $(function(){
@@ -59,6 +59,7 @@ $(function(){
 				"time":time,
 				"type":$("#type").val()
 			},
+			dataType:'json',
 			success:function(data){
 				hideLoading();
 				if(data.state==1){
@@ -96,6 +97,7 @@ function query(page){
 			"end":$("#endTime").val(),
 			"pageNo":page==null?"1":page
 		},
+		dataType:'json',
 		success:function(data){
 			hideLoading();
 			//console.log(data);

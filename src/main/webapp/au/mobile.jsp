@@ -36,6 +36,7 @@ function query(){
 			"endTime":$("#endTime").val()
 		},
 		type:"post",
+		dataType:'json',
 		success:function(data){
 			//console.log(data);
 			if(data.state!=1){

@@ -244,7 +244,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>test</finalName>
+		<finalName>au</finalName>
 		<!-- maven的jetty服务器插件 -->
 		<plugins>
 			<!-- 支持多源目录插件 -->
@@ -292,7 +292,7 @@
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<webApp>
-						<contextPath>/jta</contextPath>
+						<contextPath>/au</contextPath>
 					</webApp>
 					<!-- 修改jetty的默认端口 -->
 					<connectors>

@@ -41,9 +41,10 @@ $(function(){
 				pw:pw
 			},
 			type:'post',
+			dataType:'json',
 			success:function(data){
 				hideLoading();
-				if(data.state==1){
+				if(data.state=="1"){
 					window.location.href="<%=basePath %>";
 				}else{
 					$("#tip").html(data.info).show();

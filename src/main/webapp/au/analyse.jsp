@@ -21,13 +21,14 @@
     <![endif]-->
 	<style>
 	</style>
-	<script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+	<script language="javascript" type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 </head>
 <script>
 $(function(){
 	$.ajax({
 		url:"priceCon/getLatestPrice.action",
 		type:"post",
+		dataType:'json',
 		success:function(data){
 			if(data.state==1){
 				$("#zxj").html(data.res.zxj);
@@ -54,6 +55,7 @@ $(function(){
 			data:{
 				"price":price
 			},
+			dataType:'json',
 			success:function(data){
 				$("#dataList").empty();
 				$("#dataList").append("<tr><th>单价</th><th>质量</th><th>总计</th><th>利润</th></tr>")

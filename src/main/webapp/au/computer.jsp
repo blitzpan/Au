@@ -24,7 +24,7 @@
     <![endif]-->
 	<style>
 	</style>
-	<script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
+	<script language="javascript" type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
 <div class="container">
