@@ -102,4 +102,18 @@ public class PriceDao {
 		String sql = "SELECT * from price order by gxsj desc limit 0,1";
 		return jdbcTemplate.queryForMap(sql);
 	}
+	/**
+	 * @Description:查询所有未卖出的均价 
+	 * @param @param userName
+	 * @param @return
+	 * @param @throws Exception   
+	 * @return double  
+	 * @throws
+	 * @author Panyk
+	 * @date 2017年2月7日
+	 */
+	public double getAvgPriceForUnSell(String userName) throws Exception {
+		String sql = "SELECT sum((gram-sellgram)*price)/sum(gram-sellgram) from buyrecord where sellall=0 and username='" + userName + "'";
+		return jdbcTemplate.queryForObject(sql, Double.class);
+	}
 }

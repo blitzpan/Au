@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.au.entity.Res;
+import com.au.entity.User;
 import com.au.service.PriceService;
 
 @Controller
@@ -58,10 +59,12 @@ public class PriceController {
 	 */
 	@RequestMapping(value="/getLatestPrice")
 	@ResponseBody
-	public Object getLatestPrice(){
+	public Object getLatestPrice(HttpSession session){
 		Res res = new Res();
 		try{
-			res.setSuccessed("查询完成！", priceService.getLatestPrice());
+			User user = (User) session.getAttribute("user");
+			String userName = user.getName();
+			res.setSuccessed("查询完成！", priceService.getLatestPrice(userName));
 		}catch(Exception e){
 			log.error("getLatestRecord=", e);
 			res.setFailed("程序发生异常！");

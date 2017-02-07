@@ -31,6 +31,7 @@ $(function(){
 		dataType:'json',
 		success:function(data){
 			if(data.state==1){
+				$("#avgPrice").html(data.res.avgPrice.toFixed(3));
 				$("#zxj").html(data.res.zxj);
 				$("#zgj").html(data.res.zgj);
 				$("#zdj").html(data.res.zdj);
@@ -101,8 +102,8 @@ $(function(){
 	<div class="row">
 		<div class="col-lg-12">
 			<table class="table table-striped">
-				<tr><th>最新价</th><th>最高价</th><th>最低价</th><th>昨收价</th></tr>
-				<tr><td id="zxj"></td><td id="zgj">最高价</td><td id="zdj">最低价</td><td id="zsj">昨收价</td></tr>
+				<tr><th>当前所有未卖均价</th><th>最新价</th><th>最高价</th><th>最低价</th><th>昨收价</th></tr>
+				<tr><td id="avgPrice"></td><td id="zxj"></td><td id="zgj">最高价</td><td id="zdj">最低价</td><td id="zsj">昨收价</td></tr>
 			</table>
 		</div>
 	</div>

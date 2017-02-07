@@ -181,7 +181,7 @@ public class RecordDao {
 			sql += " and username=?";
 			values.add(p.getProperty("userName"));
 		}
-		sql += " order by time asc, selltime asc";
+		sql += " order by time desc, selltime asc";
 		page.setTotalCount(jdbcTemplate.queryForObject(PageUtil.appendCount(sql), Integer.class, values.toArray()));
 		return jdbcTemplate.query(PageUtil.appendPage(page, sql), new BeanPropertyRowMapper(Record.class), values.toArray());
 	}

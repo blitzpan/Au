@@ -108,7 +108,10 @@ public class PriceService {
 		}
 		return res;
 	}
-	public Map getLatestPrice() throws Exception{
-		return priceDao.getLatestPrice();
+	public Map getLatestPrice(String userName) throws Exception{
+		Map res = priceDao.getLatestPrice();
+		double avgPrice = priceDao.getAvgPriceForUnSell(userName);
+		res.put("avgPrice", avgPrice);
+		return res;
 	}
 }
