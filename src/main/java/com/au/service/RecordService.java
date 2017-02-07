@@ -150,22 +150,41 @@ public class RecordService {
 	 */
 	public Map analyse(Record record) throws Exception{
 		record.setSellall(0);
+		List profitList = new ArrayList();
+		List lossList = new ArrayList();
 		List<Record> records = recordDao.queryRecordForAnalyse(record);
 		double profit = 0;
 		double gram = 0;
 		double amount = 0;
+		double profit2 = 0;
+		double gram2 = 0;
+		double amount2 = 0;
 		double notSellG = 0;
 		for(Record r : records){
 			notSellG = r.getGram() - r.getSellgram();
-			gram += notSellG;
-			amount += notSellG * record.getPrice();
-			profit += notSellG * (record.getPrice() - r.getPrice());
+			if(r.getPrice()<record.getPrice()){//盈利部分
+				gram += notSellG;
+				amount += notSellG * record.getPrice();
+				profit += notSellG * (record.getPrice() - r.getPrice());
+				profitList.add(r);
+			}else{//不盈利部分
+				gram2 += notSellG;
+				amount2 += notSellG * record.getPrice();
+				profit2 += notSellG * (record.getPrice() - r.getPrice());
+				lossList.add(r);
+			}
 		}
 		Map res = new HashMap();
+		//盈利部分
 		res.put("gram", gram);
 		res.put("amount", amount);
 		res.put("profit", profit);
-		res.put("list", records);
+		res.put("list", profitList);
+		//不盈利部分
+		res.put("gram2", gram2);
+		res.put("amount2", amount2);
+		res.put("profit2", profit2);
+		res.put("lossList", lossList);
 		return res;
 	}
 	public List getRecords(Page page,Properties p) throws Exception{

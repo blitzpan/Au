@@ -135,10 +135,10 @@ public class RecordDao {
 		if(record.getSellall()!=-1){//-1是没有任何意义的。
 			sql.append(" and sellall=" + record.getSellall());
 		}
-		if(record.getPrice()-0>0.00001){//找出所有价格小于当前价格的
-			sql.append(" and price<?");
-			values.add(record.getPrice());
-		}
+//		if(record.getPrice()-0>0.00001){//找出所有价格小于当前价格的
+//			sql.append(" and price<?");
+//			values.add(record.getPrice());
+//		}
 		if(record.getUserName()!=null){
 			sql.append(" and username=?");
 			values.add(record.getUserName());

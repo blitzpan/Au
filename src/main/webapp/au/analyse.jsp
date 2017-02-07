@@ -64,6 +64,13 @@ $(function(){
 				$.each(data.res.list,function(i,item){
 					$("#dataList").append("<tr><td>"+item.price+"</td><td>"+(item.gram-item.sellgram)+"</td><td>"+((item.gram-item.sellgram)*price).toFixed(4)+"</td><td>"+((item.gram-item.sellgram)*(price-item.price)).toFixed(4)+"</td></tr>");
 				});
+				//亏损部分
+				$("#lossDataList").empty();
+				$("#lossDataList").append("<tr><th>单价</th><th>质量</th><th>总计</th><th>亏损</th></tr>")
+				.append("<tr class='success'><td>"+price+"</td><td>"+data.res.gram2+"</td><td>"+data.res.amount2.toFixed(4)+"</td><td>"+data.res.profit2.toFixed(4)+"</td></tr>");
+				$.each(data.res.lossList,function(i,item){
+					$("#lossDataList").append("<tr><td>"+item.price+"</td><td>"+(item.gram-item.sellgram)+"</td><td>"+((item.gram-item.sellgram)*price).toFixed(4)+"</td><td>"+((item.gram-item.sellgram)*(price-item.price)).toFixed(4)+"</td></tr>");
+				});
 			},
 			error:function(request,status,e){
 				$.messager.alert("警告","网络异常！");
@@ -131,6 +138,16 @@ $(function(){
 					<th>质量</th>
 					<th>总计</th>
 					<th>利润</th>
+				</tr>
+			</table>
+		</div>
+		<div class="col-lg-12">
+			<table id="lossDataList" class="table table-hover">
+				<tr>
+					<th>单价</th>
+					<th>质量</th>
+					<th>总计</th>
+					<th>亏损</th>
 				</tr>
 			</table>
 		</div>
